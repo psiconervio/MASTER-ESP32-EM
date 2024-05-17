@@ -119,8 +119,8 @@
               $arrayfechasphp[$data[$i]['date']]['max_humidity'] = max($humedad_del_dia);
               $arrayfechasphp[$data[$i]['date']]['min_humidity'] = min($humedad_del_dia);
       
-              $arrayfechasphp[$data[$i]['date']]['max_veleta'] = max($veleta_del_dia);
-              $arrayfechasphp[$data[$i]['date']]['min_veleta'] = min($veleta_del_dia);
+              // $arrayfechasphp[$data[$i]['date']]['max_veleta'] = max($veleta_del_dia);
+              // $arrayfechasphp[$data[$i]['date']]['min_veleta'] = min($veleta_del_dia);
       
               $arrayfechasphp[$data[$i]['date']]['max_anemometro'] = max($anemometro_del_dia);
               $arrayfechasphp[$data[$i]['date']]['min_anemometro'] = min($anemometro_del_dia);
