@@ -13,6 +13,7 @@ MODIFICANDO A MASTERR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
     $veleta = $_POST['veleta'];
     $anemometro = $_POST['anemometro'];
     $pluviometro = $_POST['pluviometro'];
+    
     //........................................ Get the time and date.
     date_default_timezone_set("America/Argentina/Catamarca"); // Look here for your timezone : https://www.php.net/manual/en/timezones.php
     $tm = date("H:i:s");
