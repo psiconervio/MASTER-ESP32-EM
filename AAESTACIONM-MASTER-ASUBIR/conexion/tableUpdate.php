@@ -57,7 +57,7 @@ MODIFICANDO A MASTERR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
         $found_empty = true;
       }
     }
- //   //:::::::: The process of entering data into a table.
+ //   :::::::: The process of entering data into a table.
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  //   // replace_with_your_table_name, on this project I use the table name 'esp32_table_dht11_leds_update'.
  //   // This table is used to store and record DHT11 sensor data updated by ESP32. 
