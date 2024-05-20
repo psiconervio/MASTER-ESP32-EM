@@ -1,82 +1,131 @@
-<!-- // archivo  tableUpdate .php
-// PHP code to update and record DHT11 sensor data and LEDs state in table.
-MODIFICANDO A MASTERR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class=" ">
+  <h1>LOQUE SE VA A VER EN LA ESRTACION/DIA</h1>
 <?php
-  require 'database.php';
-  
-  //---------------------------------------- Condition to check that POST value is not empty.
-  if (!empty($_POST)) {
-    //........................................ keep track POST values
-    $id = $_POST['id'];
-    $temperature = $_POST['temperature'];
-    $humidity = $_POST['humidity'];
-    $veleta = $_POST['veleta'];
-    $anemometro = $_POST['anemometro'];
-    $pluviometro = $_POST['pluviometro'];
-    
-    //........................................ Get the time and date.
-    date_default_timezone_set("America/Argentina/Catamarca"); // Look here for your timezone : https://www.php.net/manual/en/timezones.php
-    $tm = date("H:i:s");
-    $dt = date("Y-m-d");
-    //........................................
-    
-    //........................................ Updating the data in the table.
-    $pdo = Database::connect();
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // replace_with_your_table_name, on this project I use the table name 'esp32_table_dht11_leds_update'.
-    // This table is used to store DHT11 sensor data updated by ESP32. 
-    // This table is also used to store the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
-    // This table is operated with the "UPDATE" command, so this table will only contain one row.
-    $sql = "UPDATE esp32_01_tableupdate SET temperature = ?, humidity = ?, veleta = ?,anemometro = ?,pluviometro = ?, time = ?, date = ? WHERE id = ?";
-    $q = $pdo->prepare($sql);
-    $q->execute(array($temperature,$humidity,$veleta,$anemometro,$pluviometro,$tm,$dt,$id));
-    Database::disconnect();
-    //........................................ 
-    
-    //........................................ Entering data into a table.
-    $id_key;
-    $board = $_POST['id'];
-    $found_empty = false;
-    
-    $pdo = Database::connect();
-    
-    //:::::::: Process to check if "id" is already in use.
-    while ($found_empty == false) {
-      $id_key = generate_string_id(10);
-      // replace_with_your_table_name, on this project I use the table name 'esp32_table_dht11_leds_update'.
-      // This table is used to store and record DHT11 sensor data updated by ESP32. 
-      // This table is also used to store and record the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
-      // This table is operated with the "INSERT" command, so this table will contain many rows.
-      // Before saving and recording data in this table, the "id" will be checked first, to ensure that the "id" that has been created has not been used in the table.
-      $sql = 'SELECT * FROM esp32_01_tablerecord WHERE id="' . $id_key . '"';
-      $q = $pdo->prepare($sql);
-      $q->execute();
+      include 'databaseAC.php';
+      //trabajar con php
+      $num = 0;
+      $arrayfechaexactatotal = [];
+      $arraydateFormat = [];
+      $arraytemperaturate = [];
+      $arrayhumedad = [];
+
+      $pdo = Database::connect();
+
+      $sql = 'SELECT * FROM esp32_01_tablerecord ORDER BY date DESC, time DESC';
+      $fechaanterior = null;
       
-      if (!$data = $q->fetch()) {
-        $found_empty = true;
+      foreach ($pdo->query($sql) as $row) {
+        $date = date_create($row['date']);
+        $dateFormat = date_format($date, "d-m-Y");
+        $data[] = ['date' => $dateFormat, 'tiempo' => $row['time'], 'temperature' => $row['temperature'], 'humidity' => $row['humidity'], 'veleta' => $row['veleta'], 'anemometro' => $row['anemometro'], 'pluviometro' => $row['pluviometro']];
+        $longitudarray= count($data); 
+        
+        $num++;
+        // echo '<tr>';
+        // echo '<td>' . $num . '</td>';
+        // echo '<td class="bdr">' . $row['temperature'] . ' °C</td>';
+        // echo '<td class="bdr">' . $row['humidity'] . ' %</td>';
+        // echo '<td class="bdr">' . $row['veleta'] . '</td>';
+        // echo '<td class="bdr">' . $row['anemometro'] . ' km/h</td>';
+        // echo '<td class="bdr">' . $row['pluviometro'] . ' ml/h</td>';
+        // echo '<td class="bdr">' . $row['time'] . '</td>';
+        // echo '<td>' . $dateFormat . '</td>';
+        // echo '</tr>';
+        // $arraytemperaturate[] = ['temperaturaa'=>$row['temperature']];
+        $arreglofecha[] = ['date' => $dateFormat];
+        //para sacar temperatura de fechas exactas hay que iterrar en el array
+        //para sacar humedad de fechas exactas hay que iterrar en el arrayintentar hacerlo en el array data
+      
+        // print_r($data);
+        // array_push($arrayfechaexactatotal,);
+        array_push($arraydateFormat, $dateFormat);
       }
-    }
- //   //:::::::: The process of entering data into a table.
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
- //   // replace_with_your_table_name, on this project I use the table name 'esp32_table_dht11_leds_update'.
- //   // This table is used to store and record DHT11 sensor data updated by ESP32. 
- //   // This table is also used to store and record the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
- //   // This table is operated with the "INSERT" command, so this table will contain many rows.
-		$sql = "INSERT INTO esp32_01_tablerecord (id,board,temperature,humidity,veleta,anemometro,pluviometro,time,date) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id_key,$board,$temperature,$humidity,$veleta,$anemometro,$pluviometro,$tm,$dt));
-    //::::::::
-    Database::disconnect();
-  }
-  //---------------------------------------- Function to create "id" based on numbers and characters.
-  function generate_string_id($strength = 16) {
-    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $input_length = strlen($permitted_chars);
-    $random_string = '';
-    for($i = 0; $i < $strength; $i++) {
-      $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
-      $random_string .= $random_character;
-    }
-    return $random_string;
-  }  
-?>
+      //   $fechaexactacambia = $dateformat;
+      //pasar todos array php a javascript json para el manejo de la logica y asyncs y traer las tablas sea lo esperado
+      Database::disconnect();
+      //funcion para promediar maximo y minimo de la temperatura en un solo dia
+      $varprimerafecha = null;
+      $arrayfechasphp = [];
+      
+      for ($i = 0; $i < $longitudarray; $i++) { 
+          if ($data[$i]['date'] !== $varprimerafecha) {
+              // Si la fecha actual es diferente a la fecha anterior, inicializar los arrays
+              $arrayfechasphp[$data[$i]['date']] = [
+                  'max_temp' => null,
+                  'min_temp' => null,
+                  'max_humidity' => null,
+                  'min_humidity' => null,
+                  'max_veleta' => null,
+                  'min_veleta' => null,
+                  'max_anemometro' => null,
+                  'min_anemometro' => null,
+                  'max_pluviometro' => null,
+                  'min_pluviometro' => null,
+              ];
+      
+              // Inicializar arrays temporales para almacenar los valores del día actual
+              $temperaturas_del_dia = [];
+              $humedad_del_dia = [];
+              $veleta_del_dia = [];
+              $anemometro_del_dia = [];
+              $pluviometro_del_dia = [];
+      
+              // Recorrer $data para encontrar los registros del día actual
+              foreach ($data as $registro) {
+                  if ($registro['date'] === $data[$i]['date']) {
+                      $temperaturas_del_dia[] = $registro['temperature'];
+                      $humedad_del_dia[] = $registro['humidity'];
+                      $veleta_del_dia[] = $registro['veleta'];
+                      $anemometro_del_dia[] = $registro['anemometro'];
+                      $pluviometro_del_dia[] = $registro['pluviometro'];
+                  }
+              }
+      
+              // Obtener los valores máximos y mínimos para cada tipo de dato del día actual
+              $arrayfechasphp[$data[$i]['date']]['max_temp'] = max($temperaturas_del_dia);
+              $arrayfechasphp[$data[$i]['date']]['min_temp'] = min($temperaturas_del_dia);
+      
+              $arrayfechasphp[$data[$i]['date']]['max_humidity'] = max($humedad_del_dia);
+              $arrayfechasphp[$data[$i]['date']]['min_humidity'] = min($humedad_del_dia);
+      
+              // $arrayfechasphp[$data[$i]['date']]['max_veleta'] = max($veleta_del_dia);
+              // $arrayfechasphp[$data[$i]['date']]['min_veleta'] = min($veleta_del_dia);
+      
+              $arrayfechasphp[$data[$i]['date']]['max_anemometro'] = max($anemometro_del_dia);
+              $arrayfechasphp[$data[$i]['date']]['min_anemometro'] = min($anemometro_del_dia);
+      
+              $arrayfechasphp[$data[$i]['date']]['max_pluviometro'] = max($pluviometro_del_dia);
+      
+              // Actualizar $varprimerafecha
+              $varprimerafecha = $data[$i]['date'];
+          }
+      }
+      
+      // Imprimir el array de manera ordenada
+      foreach ($arrayfechasphp as $fecha => $datos) {
+          echo "Fecha: $fecha\n <br>";
+          echo "Temperatura Máxima: " . $datos['max_temp'] . "°C\n <br>";
+          echo "Temperatura Mínima: " . $datos['min_temp'] . "°C\n <br>";
+          echo "Humedad Máxima: " . $datos['max_humidity'] . "%\n <br>";
+          echo "Humedad Mínima: " . $datos['min_humidity'] . "%\n <br>";
+          echo "Veleta Máxima: " . $datos['max_veleta'] . "\n <br>";
+          echo "Veleta Mínima: " . $datos['min_veleta'] . "\n <br>";
+          echo "Anemómetro Máximo: " . $datos['max_anemometro'] . " km/h\n <br>";
+          echo "Anemómetro Mínimo: " . $datos['min_anemometro'] . " km/h\n <br>";
+          echo "Pluviómetro Máximo: " . $datos['max_pluviometro'] . " ml\n <br>";
+          echo "-------------------------\n <br>";
+      }
+      
+      ?>
+</body>
+</html>
