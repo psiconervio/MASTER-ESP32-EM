@@ -91,6 +91,8 @@
       $arrayfechasphp[$data[$i]['date']]['min_veleta'] = $min_veleta;
       $arrayfechasphp[$data[$i]['date']]['max_anemometro'] = $max_anemometro;
       $arrayfechasphp[$data[$i]['date']]['min_anemometro'] = $min_anemometro;
+      $avg_anemometro = array_sum($anemometro_del_dia) / count($anemometro_del_dia);
+      $ranemometro =round($avg_anemometro,2);
       $arrayfechasphp[$data[$i]['date']]['max_pluviometro'] = $max_pluviometro;
       $arrayfechasphp[$data[$i]['date']]['min_pluviometro'] = $min_pluviometro;
       $fechaaa = DateTime::createFromFormat('d-m-Y', $data[$i]['date'])->format('Y-m-d');
@@ -104,6 +106,9 @@
       echo "moda Veleta: " . $max_veleta . "\n <br>";
       echo "promedio Anemometro: " . $max_anemometro . "\n <br>";
       echo "sumatoria Pluviometro: " . $max_pluviometro . "\n <br>";
+      echo "sumatoria Pluviometro: " . $sum_pluviometro . "\n <br>";
+      echo "promedio Anemometro: " . $ranemometro . "\n <br>";
+
       echo "fecha: " . $fechaaa . "\n <br><br>";
       echo "\n";
 
