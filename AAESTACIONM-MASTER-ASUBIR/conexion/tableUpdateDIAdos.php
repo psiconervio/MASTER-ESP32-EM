@@ -7,7 +7,6 @@
   <title>Document</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class=" ">
   <h1>LOQUE SE VA A VER EN LA ESRTACION/DIA</h1>
   <?php include 'databaseAC.php';
@@ -35,7 +34,7 @@
     array_push($arraydateFormat, $dateFormat);
   }
   Database::disconnect();
-
+//funcion para promediar maximo y minimo de la temperatura en un solo dia
   $varprimerafecha = null;
   $arrayfechasphp = [];
   $pdo = Database::connect(); // Open the connection once
@@ -54,13 +53,13 @@
         'max_pluviometro' => null,
         'min_pluviometro' => null,
       ];
-      
+      // Inicializar arrays temporales para almacenar los valores del día actual
       $temperaturas_del_dia = [];
       $humedad_del_dia = [];
       $veleta_del_dia = [];
       $anemometro_del_dia = [];
       $pluviometro_del_dia = [];
-
+      // Recorrer $data para encontrar los registros del día actual
       foreach ($data as $registro) {
         if ($registro['date'] === $data[$i]['date']) {
           $temperaturas_del_dia[] = $registro['temperature'];
@@ -70,7 +69,7 @@
           $pluviometro_del_dia[] = $registro['pluviometro'];
         }
       }
-
+      // Obtener los valores máximos y mínimos para cada tipo de dato del día actual y asignarlos a variables
       $max_temp = max($temperaturas_del_dia);
       $min_temp = min($temperaturas_del_dia);
       $max_humidity = max($humedad_del_dia);
@@ -81,7 +80,9 @@
       $min_anemometro = min($anemometro_del_dia);
       $max_pluviometro = max($pluviometro_del_dia);
       $min_pluviometro = min($pluviometro_del_dia);
+      $sum_pluviometro = array_sum($pluviometro_del_dia);
 
+       // Asignar los valores al array usando las variables
       $arrayfechasphp[$data[$i]['date']]['max_temp'] = $max_temp;
       $arrayfechasphp[$data[$i]['date']]['min_temp'] = $min_temp;
       $arrayfechasphp[$data[$i]['date']]['max_humidity'] = $max_humidity;
@@ -114,7 +115,6 @@
       $varprimerafecha = $data[$i]['date'];
     }
   }
-
   Database::disconnect(); // Close the connection once
   ?>
 
