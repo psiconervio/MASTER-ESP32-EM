@@ -18,7 +18,7 @@
   $pdo = Database::connect();
   $sql = 'SELECT * FROM esp32_01_tablerecord ORDER BY date DESC, time DESC';
   $fechaanterior = null;
-
+ //se llena data con toda la tabla 
   foreach ($pdo->query($sql) as $row) {
     $date = date_create($row['date']);
     $dateFormat = date_format($date, "d-m-Y");
@@ -54,7 +54,7 @@
         'max_pluviometro' => null,
         'min_pluviometro' => null,
       ];
-
+      
       $temperaturas_del_dia = [];
       $humedad_del_dia = [];
       $veleta_del_dia = [];
