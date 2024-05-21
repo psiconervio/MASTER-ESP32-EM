@@ -50,8 +50,6 @@ foreach ($arrayfechasphp as $date => $values) {
     $min_anemometro = min($values['anemometros']);
     $avg_anemometro = array_sum($values['anemometros']) / count($values['anemometros']);
     $rounded_avg_anemometro = round($avg_anemometro, 2);
-    $max_pluviometro = max($values['pluviometros']);
-    $min_pluviometro = min($values['pluviometros']);
     $sum_pluviometro = array_sum($values['pluviometros']);
 
     $formatted_date = DateTime::createFromFormat('d-m-Y', $date)->format('Y-m-d');
@@ -63,7 +61,6 @@ foreach ($arrayfechasphp as $date => $values) {
     echo "Min Humidity: $min_humidity\n <br>";
     echo "Moda Veleta: $moda_veleta\n <br>";
     echo "Avg Anemometro: $rounded_avg_anemometro\n <br>";
-    echo "Max Pluviometro: $max_pluviometro\n <br>";
     echo "Sum Pluviometro: $sum_pluviometro\n <br>";
     echo "Fecha Formateada: $formatted_date\n <br><br>";
 
