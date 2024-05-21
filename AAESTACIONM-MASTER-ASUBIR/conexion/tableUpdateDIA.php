@@ -114,24 +114,22 @@
             $arrayfechasphp[$data[$i]['date']]['min_anemometro'] = $min_anemometro;
             $arrayfechasphp[$data[$i]['date']]['max_pluviometro'] = $max_pluviometro;
             $arrayfechasphp[$data[$i]['date']]['min_pluviometro'] = $min_pluviometro;
-           // $date = DateTime::createFromFormat('d-m-Y', $data[$i]['date']);
-           // $fechaexacta = $date->format('Y-m-d');
-           $fechaexacta = $data[$i]['date'];
+            $fechaaa = DateTime::createFromFormat('d-m-Y', $data[$i]['date']);
+            $fechaaa = $date->format('Y-m-d');
+            //$fechaexacta = $data[$i]['date'];
 
     
             // Imprimir los valores
             echo "Fecha: " . $data[$i]['date'] . "\n <br>";
+            echo "registros: " . $longitudarray . "\n <br>";
             echo "Max Temp: " . $max_temp . "\n <br>";
             echo "Min Temp: " . $min_temp . "\n <br>";
             echo "Max Humidity: " . $max_humidity . "\n <br>";
             echo "Min Humidity: " . $min_humidity . "\n <br>";
-            echo "Max Veleta: " . $max_veleta . "\n <br>";
-            echo "Min Veleta: " . $min_veleta . "\n <br>";
-            echo "Max Anemometro: " . $max_anemometro . "\n <br>";
-            echo "Min Anemometro: " . $min_anemometro . "\n <br>";
-            echo "Max Pluviometro: " . $max_pluviometro . "\n <br>";
-            echo "Min Pluviometro: " . $min_pluviometro . "\n <br>";
-            echo "fecha: " . $fechaexacta . "\n <br>";
+            echo "moda Veleta: " . $max_veleta . "\n <br>";
+            echo "promedio Anemometro: " . $max_anemometro . "\n <br>";
+            echo "sumatoria Pluviometro: " . $max_pluviometro . "\n <br>";
+            echo "fecha: " . $fechaaa . "\n <br><br>";
             echo "\n";
             
 
@@ -141,7 +139,7 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO esp32_01_tableupdatedia (tempmax,tempmin,hummax,hummin,veleta,anemometro,pluviometro,fecha) values(?, ?, ?, ?, ?, ?, ?, ?)";
         $q = $pdo->prepare($sql);
-        $q->execute(array($max_temp,$min_temp,$max_humidity,$min_humidity,$max_veleta,$max_anemometro,$max_pluviometro,$fechaexacta));
+        $q->execute(array($max_temp,$min_temp,$max_humidity,$min_humidity,$max_veleta,$max_anemometro,$max_pluviometro,$fechaaa));  
         //::::::::
         Database::disconnect();
             // Actualizar $varprimerafecha
