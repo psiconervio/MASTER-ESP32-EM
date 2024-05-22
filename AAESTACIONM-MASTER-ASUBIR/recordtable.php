@@ -17,18 +17,19 @@
     <thead>
       <tr>
         <th>NO</th>
-        <th>TEMPERATURA (°C)</th>
+        <th>TEMPERATURA MAX °C</th>
+        <th>TEMPERATURA MIN °C</th>
         <th>HUMEDAD (%)</th>
-        <th>DIRECCION DE VIENTO</th>
         <th>VELOCIDAD DE VIENTO</th>
         <th>CAUDAL DE LLUVIA</th>
-        <th>TIEMPO</th>
+        <th>DIRECCION DE VIENTO</th>
         <th>FECHA (D-M-A)</th>
+        
       </tr>
     </thead>
     <tbody id="tbody_table_record">
       <?php
-      include 'conexion/database.php';
+      include 'conexion/databaseAC.php';
       //trabajar con php
       $num = 0;
       $arrayfechaexactatotal = [];
@@ -45,61 +46,39 @@
       $fechaanterior = null;
       /// ADAPTAR FRONT ENDDDDD
       foreach ($pdo->query($sql) as $row) {
-       // $date = date_create($row['date']);
-       // $dateFormat = date_format($date, "d-m-Y");
+        $date = date_create($row['fecha']);
+        $dateFormat = date_format($date, "d-m-Y");
        $data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-      //  $data[] = ['date' => $dateFormat, 'tiempo' => $row['time'], 'temperature' => $row['temperature'], 'humidity' => $row['humidity'], 'veleta' => $row['veleta'], 'anemometro' => $row['anemometro'], 'pluviometro' => $row['pluviometro']];
+        $data[] = [ 'fecha' => $row['fecha'], 'max_temp' => $row['max_temp'],'min_temp' => $row['min_temp'], 'max_humidity' => $row['max_humidity'],'min_humidity' => $row['min_humidity'], 'moda_veleta' => $row['moda_veleta'], 'avg_anemometro' => $row['avg_anemometro'], 'sum_pluviometro' => $row['sum_pluviometro']];
       //  $longitudarray= count($data); 
-      //  
+      //print_r($data);  
         $num++;
         echo '<tr>';
         echo '<td>' . $num . '</td>';
-        echo '<td class="bdr">' . $row['temperature'] . ' °C</td>';
-        echo '<td class="bdr">' . $row['humidity'] . ' %</td>';
-        echo '<td class="bdr">' . $row['veleta'] . '</td>';
-        echo '<td class="bdr">' . $row['anemometro'] . ' km/h</td>';
-        echo '<td class="bdr">' . $row['pluviometro'] . ' ml/h</td>';
-        echo '<td class="bdr">' . $row['time'] . '</td>';
-        echo '<td>' . $dateFormat . '</td>';
+        echo '<td class="bdr">' . $row['max_temp'] . ' °C</td>';
+        echo '<td class="bdr">' . $row['min_temp'] . ' %</td>';
+        echo '<td class="bdr">' . $row['max_humidity'] . '</td>';
+        echo '<td class="bdr">' . $row['avg_anemometro'] . ' km/h</td>';
+        echo '<td class="bdr">' . $row['sum_pluviometro'] . ' ml/h</td>';
+        echo '<td class="bdr">' . $row['moda_veleta'] . '</td>';
+        echo '<td>' . $row['fecha'] . '</td>';
         echo '</tr>';
         // $arraytemperaturate[] = ['temperaturaa'=>$row['temperature']];
-        $arreglofecha[] = ['date' => $dateFormat];
+       // $arreglofecha[] = ['fecha' => $row['fecha']];
+        print_r($data);
         //para sacar temperatura de fechas exactas hay que iterrar en el array
         //para sacar humedad de fechas exactas hay que iterrar en el arrayintentar hacerlo en el array data
       
 
-        // print_r($data);
+        // print_r($row);
         // array_push($arrayfechaexactatotal,);
-        array_push($arraydateFormat, $dateFormat);
+        //array_push($arraydateFormat, $dateFormat);
       }
+      
       //   $fechaexactacambia = $dateformat;
       //pasar todos array php a javascript json para el manejo de la logica y asyncs y traer las tablas sea lo esperado
       Database::disconnect();
-      //funcion para promediar maximo y minimo de la temperatura en un solo dia
-      
-      
-      
-      
-      //-logica para traer los ultimos dias grabados en la base de datos, hacer logica para traer los valores
-      //implementar la carga de los ultimos 7 dias. probar con base de datos actualizada
-      // print_r($arraytemperaturate);
-      // $fechaexactacambia = null;
-      // $longfechaexacta = sizeof($arrayfechaexactatotal);
-      // $diass = 7;
-      // foreach ($arraydateFormat as $fechaexacta) {
-      //   if ($fechaexacta != $fechaexactacambia && $longfechaexacta < $diass) {
-//
-      //     array_push($arrayfechaexactatotal, $fechaexacta);
-      //     $fechaexactacambia = $fechaexacta;
-      //     $longfechaexacta++;
-      //     $arrayfechaexactatotal[] = $fechaexacta;
-      //   }
-      // }
-      //            print_r($arrayfechaexactatotal);
-      //            print_r($longfechaexacta);
-      //logica para funcion de sacar maximo y minimo de tiempo para el dashboard// sacar promedio de datos obtenidos de la base de datos, con una variacion de 5 grados
-      
+  
       ?>
       <script>
         let fechas = [];
@@ -123,7 +102,7 @@
         //  let fechas = data;
         // let temperaturadata = data.temperature;
 
-      //  var arreglofechas = <?php echo json_encode($arreglofecha); ?>;
+        var arreglofechas = <?php echo json_encode($arreglofecha); ?>;
       </script>
     </tbody>
   </table>
