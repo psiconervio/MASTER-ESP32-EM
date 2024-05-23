@@ -19,7 +19,7 @@
         <th>NO</th>
         <th>Temp-min°C</th>
         <th>Temp-min°C</th>
-        <th>Humedad(%)</th>
+        <th>Hum(%)</th>
         <th>Velocidad viento</th>
         <th>Caudal lluvia</th>
         <th class="hide-on-mobile">DireViento</th>
@@ -28,7 +28,7 @@
     </thead>
     <tbody id="tbody_table_record">
       <?php
-      include 'conexion/databaseAC.php';
+      include 'conexion/database.php';
       //trabajar con php
       $num = 0;
       $arrayfechaexactatotal = [];
