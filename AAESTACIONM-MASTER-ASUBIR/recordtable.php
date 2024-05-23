@@ -226,9 +226,7 @@
       // Map the arrayhum to remove % and convert to numbers
       const percentages = arrayhum.map(funhum);
       console.log(percentages); // Verifica el contenido
-      let cadenaSinComillas = arrayhum.replace(/"/g, "");
 
-      console.log(arrayfecha)
       // Ensure lengths of labels and datasets match
       if (arrayfecha.length !== temperatures.length || arrayfecha.length !== arrayhum.length) {
         console.error("Length mismatch between labels and datasets.");
