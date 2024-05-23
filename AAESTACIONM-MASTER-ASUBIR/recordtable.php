@@ -42,30 +42,30 @@
       // This table is used to store and record DHT11 sensor data updated by ESP32. 
       // This table is also used to store and record the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
       // To store data, this table is operated with the "INSERT" command, so this table will contain many rows.
-      $sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha';
+      $sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
       $fechaanterior = null;
       /// ADAPTAR FRONT ENDDDDD
       foreach ($pdo->query($sql) as $row) {
         $date = date_create($row['fecha']);
         $dateFormat = date_format($date, "d-m-Y");
        $data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        $data[] = [ 'fecha' => $row['fecha'], 'max_temp' => $row['max_temp'],'min_temp' => $row['min_temp'], 'max_humidity' => $row['max_humidity'],'min_humidity' => $row['min_humidity'], 'moda_veleta' => $row['moda_veleta'], 'avg_anemometro' => $row['avg_anemometro'], 'sum_pluviometro' => $row['sum_pluviometro']];
+        $datos[] = [ 'fecha' => $row['fecha'], 'max_temp' => $row['max_temp'],'min_temp' => $row['min_temp'], 'max_humidity' => $row['max_humidity'],'min_humidity' => $row['min_humidity'], 'moda_veleta' => $row['moda_veleta'], 'avg_anemometro' => $row['avg_anemometro'], 'sum_pluviometro' => $row['sum_pluviometro']];
       //  $longitudarray= count($data); 
       //print_r($data);  
         $num++;
         echo '<tr>';
         echo '<td>' . $num . '</td>';
-        echo '<td class="bdr">' . $row['max_temp'] . ' °C</td>';
-        echo '<td class="bdr">' . $row['min_temp'] . ' %</td>';
+        echo '<td class="bdr">' . $row['max_temp'] . '°C </td>';
+        echo '<td class="bdr">' . $row['min_temp'] . ' °C</td>';
         echo '<td class="bdr">' . $row['max_humidity'] . '</td>';
         echo '<td class="bdr">' . $row['avg_anemometro'] . ' km/h</td>';
-        echo '<td class="bdr">' . $row['sum_pluviometro'] . ' ml/h</td>';
+        echo '<td class="bdr">' . $row['sum_pluviometro'] . ' ml</td>';
         echo '<td class="bdr">' . $row['moda_veleta'] . '</td>';
         echo '<td>' . $row['fecha'] . '</td>';
         echo '</tr>';
         // $arraytemperaturate[] = ['temperaturaa'=>$row['temperature']];
-       // $arreglofecha[] = ['fecha' => $row['fecha']];
-        print_r($data);
+        $arreglofecha[] = ['fecha' => $row['fecha']];
+        //print_r($datos);
         //para sacar temperatura de fechas exactas hay que iterrar en el array
         //para sacar humedad de fechas exactas hay que iterrar en el arrayintentar hacerlo en el array data
       
@@ -197,12 +197,12 @@
           var valorhum = hum.innerText;
           var valorhora = hora.innerText;
           //push para cambiar el sentido de la grafica
-          arraypluvi.unshift(valorpluvi);
+          //arraypluvi.unshift(valorpluvi);
           arrayfecha.unshift(valorfecha);
           arraytemp.unshift(valortemp);
           arrayhum.unshift(valorhum);
-          arrayhora.unshift(valorhora);
-          // console.log(valortemp);
+          //arrayhora.unshift(valorhora);
+          // console.log(children);
           // console.log(valor);
           fechaa;
           if (myChart) {
@@ -210,16 +210,25 @@
           }
         }
       }
+    //script para elminar el °c de los valores para pasar al grafico
+    const funtemp = (str) => {
+            const match = str.match(/(\d+)/);
+            return match ? `${match[1]}` : null;
+        };
+        const temperatures = arraytemp.map(funtemp);
+
+        console.log(temperatures);
+
       const constlowbatery = 100;
       if (arraypluvi >= constlowbatery) {
-        console.log("bateria baja")
+       // console.log("bateria baja")
         ///pasar todo a javascritp
       }
-      console.log(arraypluvi);
-      console.log(arrayfecha);
+      //console.log(arraypluvi);
+      //console.log(arrayfecha);
       console.log(arraytemp);
-      console.log(arrayhum);
-      console.log(arrayhora);
+      //console.log(arrayhum);
+      //console.log(arrayhora);
 
       page_span.innerHTML = page + "/" + numPages() + " (Total numero de filas = " + (l - 1) + ") | Numero de filas : ";
 
@@ -263,14 +272,15 @@
     console.log(data);
     var arraytemperaturatotal = <?php echo json_encode($arraytemperaturate); ?>;
     console.log(arraytemperaturatotal);
+    
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
-        labels: arrayfechaexactatotal,
+        labels: arrayfecha,
         datasets: [{
           label: 'Temperatura',
-          data: arraytemp,
+          data: temperatures,
           borderColor: 'rgba(255, 99, 132, 1)',
           fill: false
         }, {
