@@ -280,7 +280,7 @@
         labels: arrayfecha,
         datasets: [{
           label: 'Temperatura',
-          data: temperatures,
+          data: arraytemp,
           borderColor: 'rgba(255, 99, 132, 1)',
           fill: false
         }, {
