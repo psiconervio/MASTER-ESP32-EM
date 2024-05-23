@@ -17,14 +17,13 @@
     <thead>
       <tr>
         <th>NO</th>
-        <th>TEMPERATURA MAX °C</th>
-        <th>TEMPERATURA MIN °C</th>
-        <th>HUMEDAD (%)</th>
-        <th>VELOCIDAD DE VIENTO</th>
-        <th>CAUDAL DE LLUVIA</th>
-        <th>DIRECCION DE VIENTO</th>
-        <th>FECHA (D-M-A)</th>
-        
+        <th>Temp-min°C</th>
+        <th>Temp-min°C</th>
+        <th>Humedad(%)</th>
+        <th>Velocidad viento</th>
+        <th>Caudal lluvia</th>
+        <th class="hide-on-mobile">DireViento</th>
+        <th>Fecha</th>
       </tr>
     </thead>
     <tbody id="tbody_table_record">
@@ -56,11 +55,11 @@
         echo '<tr>';
         echo '<td>' . $num . '</td>';
         echo '<td class="bdr">' . $row['max_temp'] . '°C </td>';
-        echo '<td class="bdr">' . $row['min_temp'] . ' °C</td>';
-        echo '<td class="bdr">' . $row['max_humidity'] . '</td>';
-        echo '<td class="bdr">' . $row['avg_anemometro'] . ' km/h</td>';
-        echo '<td class="bdr">' . $row['sum_pluviometro'] . ' ml</td>';
-        echo '<td class="bdr">' . $row['moda_veleta'] . '</td>';
+        echo '<td class="bdr">' . $row['min_temp'] . '°C</td>';
+        echo '<td class="bdr">' . $row['max_humidity'] .'%</td>';
+        echo '<td class="bdr">' . $row['avg_anemometro'] .'km/h</td>';
+        echo '<td class="bdr">' . $row['sum_pluviometro'] .'ml</td>';
+        echo '<td class="bdr">' . $row['moda_veleta'] .'</td>';
         echo '<td>' . $row['fecha'] . '</td>';
         echo '</tr>';
         // $arraytemperaturate[] = ['temperaturaa'=>$row['temperature']];
@@ -198,9 +197,9 @@
           var valorhora = hora.innerText;
           //push para cambiar el sentido de la grafica
           //arraypluvi.unshift(valorpluvi);
-          arrayfecha.unshift(valorfecha);
-          arraytemp.unshift(valortemp);
-          arrayhum.unshift(valorhum);
+          arrayfecha.push(valorfecha);
+          arraytemp.push(valortemp);
+          arrayhum.push(valorhum);
           //arrayhora.unshift(valorhora);
           // console.log(children);
           // console.log(valor);
@@ -210,14 +209,39 @@
           }
         }
       }
-    //script para elminar el °c de los valores para pasar al grafico
-    const funtemp = (str) => {
-            const match = str.match(/(\d+)/);
-            return match ? `${match[1]}` : null;
-        };
-        const temperatures = arraytemp.map(funtemp);
+      // Remove the °C from the temperature values
+      const funtemp = (str) => {
+        const match = str.match(/(\d+)/);
+        return match ? parseFloat(match[1]) : null;
+      };
+      const temperatures = arraytemp.map(funtemp);
 
-        console.log(temperatures);
+      console.log(temperatures); // Verifica el contenido de temperatures
+      // Remove the % from the percentage values
+      const funhum = (str) => {
+        const match = str.match(/(\d+)/);
+        return match ? parseFloat(match[1]) : null;
+      };
+
+      // Map the arrayhum to remove % and convert to numbers
+      const percentages = arrayhum.map(funhum);
+      console.log(percentages); // Verifica el contenido
+      let cadenaSinComillas = arrayhum.replace(/"/g, "");
+
+      console.log(arrayfecha)
+      // Ensure lengths of labels and datasets match
+      if (arrayfecha.length !== temperatures.length || arrayfecha.length !== arrayhum.length) {
+        console.error("Length mismatch between labels and datasets.");
+        return;
+      }
+
+      // Update Chart.js
+      if (myChart) {
+        myChart.data.labels = arrayfecha;
+        myChart.data.datasets[0].data = temperatures;
+        myChart.data.datasets[1].data = arrayhum;
+        myChart.update();
+      }
 
       const constlowbatery = 100;
       if (arraypluvi >= constlowbatery) {
@@ -227,7 +251,7 @@
       //console.log(arraypluvi);
       //console.log(arrayfecha);
       console.log(arraytemp);
-      //console.log(arrayhum);
+      console.log(arrayhum);
       //console.log(arrayhora);
 
       page_span.innerHTML = page + "/" + numPages() + " (Total numero de filas = " + (l - 1) + ") | Numero de filas : ";
@@ -264,7 +288,7 @@
   </script>
   <h1>GRAFICO DE TIEMPO</h1>
   <div id="graficocanvas"
-    style="height:80vh; width:100vw; margin: 0; display: flex; justify-content: center; align-items: center;">
+    style="height:80vh; width:100vw; margin: 0; display: flex; justify-content: center; ">
     <canvas id="myChart"></canvas>
   </div>
   <script>
@@ -275,17 +299,17 @@
     
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: arrayfecha,
+        labels: [],
         datasets: [{
           label: 'Temperatura',
-          data: arraytemp,
+          data: [],
           borderColor: 'rgba(255, 99, 132, 1)',
           fill: false
         }, {
           label: 'Humedad',
-          data: arrayhum,
+          data: [],
           borderColor: 'rgba(75, 192, 192, 1)',
           fill: false
         }]

@@ -90,3 +90,39 @@ tr:hover {background-color: rgba(12, 105, 128, 0.15);}
   cursor: not-allowed;
   pointer-events:none;
 }
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
+  .styled-table th {
+    padding: 0px 0px;
+    text-align: center;
+}
+.styled-table td {
+  padding: 0px 0px;
+  text-align: center;
+}
+.hide-on-mobile {
+  display: none;
+}
+tr td:nth-child(7) {
+  display: none;
+  
+}
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  .styled-table th {
+    padding: 0px 0px;
+    text-align: center;
+}
+.styled-table td {
+  padding: 0px 0px;
+  text-align: center;
+}
+.hide-on-mobile {
+  display: none;
+}
+tr td:nth-child(7) {
+  display: none;
+  
+}
+}
