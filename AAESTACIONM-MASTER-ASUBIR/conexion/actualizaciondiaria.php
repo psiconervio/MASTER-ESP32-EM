@@ -1,5 +1,5 @@
 <?php
-include 'databaseAC.php';
+include 'database.php';
 
 $pdo = Database::connect();
 

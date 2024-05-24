@@ -83,7 +83,7 @@
         let fechas = [];
         let fechaanterior ;
         var data = <?php echo json_encode($data); ?>;
-        console.log(data);
+        //console.log(data);
         function fechaa() {
           for (let i = 0; i <= 15; i++) {
 
@@ -93,7 +93,7 @@
 
             }
           }
-          console.log(fechas);
+         // console.log(fechas);
 
           //  hacer una sola funcion para que se ejecute cuando se aprieta el boton
         }
@@ -119,6 +119,7 @@
       <option value="100">100</option>
     </select>
     <button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Aplicar</button>
+    <a href="index.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Volver al Dashboard</button></a>
   </div>
   <br>
   <script>
@@ -183,7 +184,7 @@
           //console.log(listing_table.rows[i].style.display);
           //extrae datos especificos de la tabla
           var row = listing_table.rows[i];
-          console.log(row)
+          //console.log(row)
           var children = row.children;
           var fecha = row.children[7];
           var temp = row.children[1];
@@ -225,7 +226,7 @@
 
       // Map the arrayhum to remove % and convert to numbers
       const percentages = arrayhum.map(funhum);
-      console.log(percentages); // Verifica el contenido
+      //console.log(percentages); // Verifica el contenido
 
       // Ensure lengths of labels and datasets match
       if (arrayfecha.length !== temperatures.length || arrayfecha.length !== arrayhum.length) {
@@ -237,9 +238,9 @@
       if (myChart) {
         myChart.data.labels = arrayfecha;
         myChart.data.datasets[0].data = temperatures;
-        myChart.data.datasets[1].data = arrayhum;
+        myChart.data.datasets[1].data = percentages;
         myChart.update();
-        console.log(arrayhum)
+        //console.log(arrayhum)
       }
 
       const constlowbatery = 100;
@@ -249,7 +250,7 @@
       }
       //console.log(arraypluvi);
       //console.log(arrayfecha);
-      console.log(arraytemp);
+      console.log(percentages);
       console.log(arrayhum);
       //console.log(arrayhora);
 
@@ -293,9 +294,9 @@
   </div>
   <script>
     var data = <?php echo json_encode($data); ?>;
-    console.log(data);
+   //| console.log(data);
     var arraytemperaturatotal = <?php echo json_encode($arraytemperaturate); ?>;
-    console.log(arraytemperaturatotal);
+    //console.log(arraytemperaturatotal);
     
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -326,8 +327,10 @@
     if (myChart) {
       myChart.update();
     }
-    console.log(arrayfechaexactatotal);
+    //console.log(arrayfechaexactatotal);
   </script>
+  <a href="index.php"><button class="button" id="btn_apply">dashboard</button></a>}
+  <button class="button" id="btn_apply">dashboard</button>
 </body>
 <footer>
 </footer>
