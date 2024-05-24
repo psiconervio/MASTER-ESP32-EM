@@ -16,9 +16,9 @@
   <table class="styled-table" id="table_id">
     <thead>
       <tr>
-        <th>NO</th>
-        <th>Temp-min°C</th>
-        <th>Temp-min°C</th>
+        <th>N°</th>
+        <th>Temp-max°C</th>
+        <th class="hide-on-mobile">Temp-min°C</th>
         <th>Hum(%)</th>
         <th>Velocidad viento</th>
         <th>Caudal lluvia</th>
@@ -219,8 +219,8 @@
       console.log(temperatures); // Verifica el contenido de temperatures
       // Remove the % from the percentage values
       const funhum = (str) => {
-        const match = str.match(/(\d+)/);
-        return match ? parseFloat(match[1]) : null;
+        const matchh = str.match(/(\d+)/);
+        return matchh ? parseFloat(matchh[1]) : null;
       };
 
       // Map the arrayhum to remove % and convert to numbers
@@ -239,6 +239,7 @@
         myChart.data.datasets[0].data = temperatures;
         myChart.data.datasets[1].data = arrayhum;
         myChart.update();
+        console.log(arrayhum)
       }
 
       const constlowbatery = 100;
@@ -284,7 +285,8 @@
     };
     //------------------------------------------------------------
   </script>
-  <h1>GRAFICO DE TIEMPO</h1>
+    <h1 style="color: #0c6980;">Grafico de Tiempo</h1>
+
   <div id="graficocanvas"
     style="height:80vh; width:100vw; margin: 0; display: flex; justify-content: center; ">
     <canvas id="myChart"></canvas>
