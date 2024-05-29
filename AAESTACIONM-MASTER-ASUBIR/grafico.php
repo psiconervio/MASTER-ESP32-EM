@@ -11,8 +11,10 @@
   <div class="topnav">
     <h3>LABORATORIO DE INNOVACION</h3>
   </div>
-  <br>
- <input type="date" name="" id="">
+  <br><form action="" method="post">
+  <input type="date" name="" id="">
+    <input type="submit" value="Enviar">
+  </form>
   <h3 style="color: #0c6980;">DATOS ESTACION METEREOLOGICA</h3>
   <table class="styled-table" id="table_id">
     <thead>
