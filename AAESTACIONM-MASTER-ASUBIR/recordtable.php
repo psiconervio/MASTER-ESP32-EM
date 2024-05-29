@@ -120,6 +120,7 @@
     </select>
     <button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Aplicar</button>
     <a href="index.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Volver al Dashboard</button></a>
+    <a href="grafico.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Grafico</button></a>
   </div>
   <br>
   <script>
