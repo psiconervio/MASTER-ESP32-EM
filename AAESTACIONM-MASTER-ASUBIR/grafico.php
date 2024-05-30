@@ -44,11 +44,12 @@
         }
     </script> -->
       <?php
-if (!empty($_POST)) {
-  $fecha = $_POST['fecha'];
-  print_r($fecha);
-}
       include 'conexion/database.php';
+
+        if (!empty($_POST)) {
+          $fecha = $_POST['fecha'];
+          print_r($fecha);
+        }
       //trabajar con php
 //       $num = 0;
 //       $arrayfechaexactatotal = [];
@@ -61,8 +62,8 @@ if (!empty($_POST)) {
 //       // This table is used to store and record DHT11 sensor data updated by ESP32. 
 //       // This table is also used to store and record the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
 //       // To store data, this table is operated with the "INSERT" command, so this table will contain many rows.
-        $sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
-      //  $sql = 'SELECT * FROM esp32_01_tableupdatedia fecha >= DATE_SUB('tu_fecha_especifica', INTERVAL 7 DAY);';
+      //  $sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
+        $sql = 'SELECT * FROM esp32_01_tableupdatedia fecha >= DATE_SUB('$fecha', INTERVAL 7 DAY);';
 //       $fechaanterior = null;
 //       /// ADAPTAR FRONT ENDDDDD
 //       foreach ($pdo->query($sql) as $row) {
