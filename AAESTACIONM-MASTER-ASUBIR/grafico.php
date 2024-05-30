@@ -11,10 +11,13 @@
   <div class="topnav">
     <h3>LABORATORIO DE INNOVACION</h3>
   </div>
-  <br><form action="" method="post">
-  <input type="date" name="" id="">
-    <input type="submit" value="Enviar">
-  </form>
+  <br>
+<form action="" method="post">
+<label for="fecha">Seleccione una fecha:</label>
+    <input type="date" id="fecha">
+    <button onclick="obtenerFecha()">Obtener Fecha</button>
+    <button type="submit">submit</button>
+</form>
   <h3 style="color: #0c6980;">DATOS ESTACION METEREOLOGICA</h3>
   <table class="styled-table" id="table_id">
     <thead>
@@ -30,7 +33,22 @@
       </tr>
     </thead>
     <tbody id="tbody_table_record">
+    <!-- <script>
+        function obtenerFecha() {
+            // Obtiene el elemento input por su id
+            var inputFecha = document.getElementById('fecha');
+            // Obtiene el valor del input
+            var valorFecha = inputFecha.value;
+            // Muestra el valor en una alerta
+            console.log(valorFecha);
+            alert('La fecha seleccionada es: ' + valorFecha);
+        }
+    </script> -->
       <?php
+if (!empty($_POST)) {
+  $fecha = $_POST['fecha'];
+  print_r($fecha);
+}
       include 'conexion/database.php';
       //trabajar con php
 //       $num = 0;
@@ -39,12 +57,13 @@
 //       $arraytemperaturate = [];
 //       $arrayhumedad = [];
 //       //The process for displaying a record table containing the DHT11 sensor data and the state of the LEDs.
-//       $pdo = Database::connect();
+       $pdo = Database::connect();
 //       // replace_with_your_table_name, on this project I use the table name 'esp32_table_dht11_leds_record'.
 //       // This table is used to store and record DHT11 sensor data updated by ESP32. 
 //       // This table is also used to store and record the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
 //       // To store data, this table is operated with the "INSERT" command, so this table will contain many rows.
-//       $sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
+        $sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
+      //  $sql = 'SELECT * FROM esp32_01_tableupdatedia fecha >= DATE_SUB('tu_fecha_especifica', INTERVAL 7 DAY);';
 //       $fechaanterior = null;
 //       /// ADAPTAR FRONT ENDDDDD
 //       foreach ($pdo->query($sql) as $row) {
@@ -82,10 +101,10 @@
 //       Database::disconnect();
   
 //       ?>
-//       <script>
+       <script>
 //         let fechas = [];
 //         let fechaanterior ;
-//         var data = <?php echo json_encode($data); ?>;
+        //  var data = 
 //         //console.log(data);
 //         function fechaa() {
 //           for (let i = 0; i <= 15; i++) {
@@ -104,29 +123,31 @@
 //         //  let fechas = data;
 //         // let temperaturadata = data.temperature;
 
-//         var arreglofechas = <?php echo json_encode($arreglofecha); ?>;
-//       </script>
-//     </tbody>
-//   </table>
-//   <br>
-//   <div class="btn-group">
-//     <button class="button" id="btn_prev" onclick="prevPage()">Anterior</button>
-//     <button class="button" id="btn_next" onclick="nextPage()">Siguiente</button>
-//     <div style="display: inline-block; position:relative; border: 0px solid #e3e3e3; float: center; margin-left: 2px;;">
-//       <p style="position:relative; font-size: 14px;"> Tabla : <span id="page"></span></p>
-//     </div>
-//     <select name="number_of_rows" id="number_of_rows">
-//       <option value="10">10</option>
-//       <option value="25">25</option>
-//       <option value="50">50</option>
-//       <option value="100">100</option>
-//     </select>
-//     <button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Aplicar</button>
-//     <a href="index.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Volver al Dashboard</button></a>
-//     <a href="grafico.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Grafico</button></a>
-//   </div>
-//   <br>
-//   <script>
+        // var arreglofechas = <?php 
+        // echo json_encode($arreglofecha);
+         ?>;
+       </script>
+     </tbody>
+   </table>
+   <br>
+   <div class="btn-group">
+     <button class="button" id="btn_prev" onclick="prevPage()">Anterior</button>
+     <button class="button" id="btn_next" onclick="nextPage()">Siguiente</button>
+     <div style="display: inline-block; position:relative; border: 0px solid #e3e3e3; float: center; margin-left: 2px;;">
+       <p style="position:relative; font-size: 14px;"> Tabla : <span id="page"></span></p>
+     </div>
+     <select name="number_of_rows" id="number_of_rows">
+       <option value="10">10</option>
+       <option value="25">25</option>
+       <option value="50">50</option>
+       <option value="100">100</option>
+     </select>
+     <button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Aplicar</button>
+     <a href="index.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Volver al Dashboard</button></a>
+     <a href="grafico.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Grafico</button></a>
+   </div>
+   <br>
+   <script>
 //     //script para sacar fecha actual y de los ultimos 6 dias
 //     // let fechas = [];
 //     // for(let i = 0; i < 7; i++){
@@ -290,16 +311,12 @@
 //     };
 //     //------------------------------------------------------------
 //   </script>
-//     <h1 style="color: #0c6980;">Grafico de Tiempo</h1>
+     <h1 style="color: #0c6980;">Grafico de Tiempo</h1>
 
-//   <div id="graficocanvas"
-//     style="height:80vh; width:100vw; margin: 0; display: flex; justify-content: center; ">
-//     <canvas id="myChart"></canvas>
-//   </div>
-//   <script>
-//     var data = <?php echo json_encode($data); ?>;
-//    //| console.log(data);
-//     var arraytemperaturatotal = <?php echo json_encode($arraytemperaturate); ?>;
+   <div id="graficocanvas" style="height:80vh; width:100vw; margin: 0; display: flex; justify-content: center; ">
+     <canvas id="myChart"></canvas>
+   </div>
+   <script>
 //     //console.log(arraytemperaturatotal);
     
 //     var ctx = document.getElementById('myChart').getContext('2d');
@@ -333,8 +350,8 @@
 //     }
 //     //console.log(arrayfechaexactatotal);
 //   </script>
-//   <a href="index.php"><button class="button" id="btn_apply">dashboard</button></a>}
-//   <button class="button" id="btn_apply">dashboard</button>
+   <a href="index.php"><button class="button" id="btn_apply">dashboard</button></a>}
+   <button class="button" id="btn_apply">dashboard</button>
 </body>
 <footer>
 </footer>
