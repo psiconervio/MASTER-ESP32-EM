@@ -12,12 +12,11 @@
     <h3>LABORATORIO DE INNOVACION</h3>
   </div>
   <br>
-<form action="" method="post">
-<label for="fecha">Seleccione una fecha:</label>
-    <input type="date" id="fecha">
-    <button onclick="obtenerFecha()">Obtener Fecha</button>
-    <button type="submit">submit</button>
-</form>
+  <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <label for="fecha">Selecciona una fecha:</label>
+        <input type="date" name="fecha" id="fecha">
+        <button type="submit">Enviar</button>
+    </form>
   <h3 style="color: #0c6980;">DATOS ESTACION METEREOLOGICA</h3>
   <table class="styled-table" id="table_id">
     <thead>
