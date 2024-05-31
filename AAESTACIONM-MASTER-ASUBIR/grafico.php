@@ -63,16 +63,16 @@
 //       // This table is also used to store and record the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
 //       // To store data, this table is operated with the "INSERT" command, so this table will contain many rows.
       //  $sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
-        $sql = 'SELECT * FROM esp32_01_tableupdatedia fecha >= DATE_SUB('$fecha', INTERVAL 7 DAY);';
+        $sql = "SELECT * FROM esp32_01_tableupdatedia fecha >= DATE_SUB('$fecha', INTERVAL 7 DAY);";
 //       $fechaanterior = null;
 //       /// ADAPTAR FRONT ENDDDDD
-//       foreach ($pdo->query($sql) as $row) {
+       foreach ($pdo->query($sql) as $row) {
 //         $date = date_create($row['fecha']);
 //         $dateFormat = date_format($date, "d-m-Y");
-//        $data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);}
 //         $datos[] = [ 'fecha' => $row['fecha'], 'max_temp' => $row['max_temp'],'min_temp' => $row['min_temp'], 'max_humidity' => $row['max_humidity'],'min_humidity' => $row['min_humidity'], 'moda_veleta' => $row['moda_veleta'], 'avg_anemometro' => $row['avg_anemometro'], 'sum_pluviometro' => $row['sum_pluviometro']];
 //       //  $longitudarray= count($data); 
-//       //print_r($data);  
+       print_r($data);  
 //         $num++;
 //         echo '<tr>';
 //         echo '<td>' . $num . '</td>';
