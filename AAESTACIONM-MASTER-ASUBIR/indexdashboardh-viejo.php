@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <!-- <link rel="stylesheet" href="resources/background.css"> -->
   <!-- <script src="resources/jquery.js"></script> -->
@@ -12,6 +11,12 @@ window.onload = function () {
 //  document.getElementById('onload').style.display = 'none';
 //  document.body.classList.remove('hidden');
 //  document.querySelector('.svg-class').style.visibility = 'visible';
+  //cargaruv();
+  //cargarDatos();
+  //Get_Data("esp32_01");
+//setInterval(cargarDatos, 60000);
+//setInterval(cargaruv, 1200000);
+//setInterval(myTimer, 12000);
 }
   </script>
   <!--script api uv-->
@@ -20,12 +25,9 @@ window.onload = function () {
   <!-- <link rel="stylesheet" href="resources/style-hover-moreinfo.css"> -->
   <!-- <script src="resources/fontasome.js" ></script> -->
   <link rel="stylesheet" href="resources/stylenew.css">
-  <script>
-    
-
-  </script>
 </head>
 <!--loader-->
+
 <body class="hidden">
   <!-- <div class="centrado" id='onload' style="z-index: 2;">
     <div class="lds-ring">
@@ -35,6 +37,7 @@ window.onload = function () {
       <div></div>
     </div>
   </div> -->
+
   <div class="topnav">
     <img src="resources/img/logolabblack-modified.png" style="heigth:70px; width: 60px;">
     <h3>Laboratorio de Innovacion - Estacion Metereologica </h3>
@@ -154,7 +157,9 @@ window.onload = function () {
   </div>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
-
+  <script src="resources/apiclimaa.js"></script>
+  <script src="resources/getdata.js"></script>
+  <script src="resources/cargaruv.js"></script>
 </body>
 <footer>
   <div class="content">
@@ -164,24 +169,12 @@ window.onload = function () {
         <img id="catacapi" src="resources/img/muniwhite.png"></img>
         <div class="texto-footer">
           <h3>ÚLTIMA VEZ RECIBIDO DATOS DE ESP32 [ <span id="ESP32_01_LTRD"></span> ]</h3>
-          <a href="recordtable.php">
-          <button>Abrir tabla de registros</button></a>
+          <button onclick="window.open('recordtable.php', '_blank');">Abrir tabla de registros</button>
         </div>
         <img id="whitenodo" src="resources/img/whitenodo.png"> </img>
       </div>
     </div>
   </div>
-  <script src="resources/apiclimaa.js"></script>
-  <script src="resources/getdata.js"></script>
-  <script src="resources/cargaruv.js"></script>
-  <script>
-      cargaruv();
-  cargarDatos();
-  Get_Data("esp32_01");
-setInterval(cargarDatos, 60000);
-setInterval(cargaruv, 1200000);
-setInterval(myTimer, 12000);
-  </script>
 </footer>
 
 </html>

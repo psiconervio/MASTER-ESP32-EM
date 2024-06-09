@@ -19,6 +19,7 @@ async function cargarDatos() {
     document.getElementById("visibilidad").innerText = visibilidad.toFixed(1);
 
     actualizarVideoYDescripcion(descripcionCielo);
+    console.log(data.weather[0].main);
   } catch (error) {
     console.error('Error al llamar a la API:', error);
     // Aquí puedes agregar código para manejar el error, como mostrar un mensaje al usuario

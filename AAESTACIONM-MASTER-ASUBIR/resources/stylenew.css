@@ -9,6 +9,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(62, 165, 188, 0.626);
 }
+html {color:white;}
 
 .texto-footer h3{
   font-size: 0.7rem;
@@ -140,8 +141,8 @@ body {
 .card.header {
   background-color: #25488d;
   color: white;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 21px;
+  border-bottom-left-radius: 12px;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
 }
@@ -156,18 +157,18 @@ body {
   position: absolute;
   bottom: 100px;
   width: 100%;
-  display: flex;
+  /* display: flex;
   justify-content: flex-start;
-  overflow-x: auto; /* Agregado para permitir desplazamiento horizontal */
+  overflow-x: auto; Agregado para permitir desplazamiento horizontal */
 }
 
 .contenedorTodosItems {
   position: absolute;
   bottom: 0;
   width: 100%;
-  display: flex;
+  /* display: flex;
   justify-content: flex-start;
-  overflow-x: auto; /* Agregado para permitir desplazamiento horizontal */
+  overflow-x: auto; Agregado para permitir desplazamiento horizontal */
   
 }
 .detalless {
@@ -194,7 +195,7 @@ body {
   z-index: 1;
 }
 .contenedorInterior {
-  display: flex;
+  /* display: flex; */
   flex-wrap: nowrap;
   gap: 5px; /* Espacio entre elementos */
   padding-left: 5px; /* Ajusta el relleno izquierdo para centrar el primer elemento */
