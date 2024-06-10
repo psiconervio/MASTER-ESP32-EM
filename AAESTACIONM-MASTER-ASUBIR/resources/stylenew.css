@@ -111,7 +111,7 @@ html {
   display: inline-block;
   text-align: center;
   /* background-color: #232325; */
-  background-color: #0e4166;
+  background-color: #202020;
 }
 
 h2 {
@@ -155,13 +155,68 @@ body {
 }
 .contenedorTodosItem {
   position: absolute;
-  bottom: 100px;
+  bottom: 115px;
   width: 100%;
   /* display: flex;
   justify-content: flex-start;
   overflow-x: auto; Agregado para permitir desplazamiento horizontal */
 }
+/* CSS */
+.button-4 {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
 
+.button-4:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-4:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.button-4:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-4:focus {
+  outline: 1px transparent;
+}
+
+.button-4:before {
+  display: none;
+}
+
+.button-4:-webkit-details-marker {
+  display: none;
+}
 .contenedorTodosItems {
   position: absolute;
   bottom: 0;
@@ -210,13 +265,14 @@ body {
   white-space: nowrap; /* Evita el quiebre del texto en varias líneas */
   font-weight: bold;
 }
+
 .contenedorItem {
   box-shadow: 0px 0px 10px 1px rgba(140, 140, 140, 0.5);
   border: 1px solid #00bafa;
   border-radius: 15px;
   display: inline-block;
   height: auto; /* Cambiado a "auto" para permitir el crecimiento en altura según el contenido */
-  min-width: 80px; /* Establece un ancho mínimo para evitar el corte del primer elemento */
+  min-width: 100px; /* Establece un ancho mínimo para evitar el corte del primer elemento */
   border: 2px solid rgba(255, 255, 255, 0.551); /* Hacer el borde transparente */
   justify-content: flex-end;
   justify-content: space-around;
@@ -368,10 +424,87 @@ input:disabled + .sliderTS {
     width: 200px;
   }
 }
+#graficocanvas {
+  height:80vh; width:100vw; margin: 0; display: flex; justify-content: center;
+}
+/* CSS */
+.button-25 {
+  background-color: #36A9AE;
+  background-image: linear-gradient(#37ADB2, #329CA0);
+  border: 1px solid #2A8387;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: block;
+  font-family: -apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 17px;
+  line-height: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 11px 15px 12px;
+  text-align: center;
+  transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-25:hover {
+  box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+  text-decoration: none;
+  transition-duration: .15s, .15s;
+}
+
+.button-25:active {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+}
+
+.button-25:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.button-25:disabled:active {
+  pointer-events: none;
+}
+
+.button-25:disabled:hover {
+  box-shadow: none;
+}
+/* CSS */
+.button-47 {
+  align-items: center;
+  background: #FFFFFF;
+  border: 0 solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  color: #1A202C;
+  display: inline-flex;
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 56px;
+  justify-content: center;
+  line-height: 24px;
+  overflow-wrap: break-word;
+  padding: 24px;
+  text-decoration: none;
+  width: auto;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 /* Media Query para hacerlo responsivo */
 @media (max-width: 700px) {
   .texto-footer h3{
     font-size: 0.6rem;
+  }
+  #graficocanvas{
+    height: 0px;
   }
   #whitenodo{
     width: 140px;

@@ -289,8 +289,7 @@
   </script>
     <h1 style="color: #0c6980;">Grafico de Tiempo</h1>
 
-  <div id="graficocanvas"
-    style="height:80vh; width:100vw; margin: 0; display: flex; justify-content: center; ">
+  <div id="graficocanvas">
     <canvas id="myChart"></canvas>
   </div>
   <script>
@@ -301,18 +300,18 @@
     
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: [],
         datasets: [{
           label: 'Temperatura',
           data: [],
-          borderColor: 'rgba(255, 99, 132, 1)',
+          backgroundColor: 'rgba(255, 99, 132, 1)',
           fill: false
         }, {
           label: 'Humedad',
           data: [],
-          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 1)',
           fill: false
         }]
       },
@@ -330,8 +329,6 @@
     }
     //console.log(arrayfechaexactatotal);
   </script>
-  <a href="index.php"><button class="button" id="btn_apply">dashboard</button></a>}
-  <button class="button" id="btn_apply">dashboard</button>
 </body>
 <footer>
 </footer>

@@ -5,27 +5,24 @@
   <!-- <link rel="stylesheet" href="resources/background.css"> -->
   <!-- <script src="resources/jquery.js"></script> -->
   <script>
-window.onload = function () {
-  $('#onload').fadeOut();
+    window.onload = function () {
+      $('#onload').fadeOut();
       $('body').removeClass('hidden');
       document.querySelector('.svg-class').style.visibility = 'visible';
-//  document.getElementById('onload').style.display = 'none';
-//  document.body.classList.remove('hidden');
-//  document.querySelector('.svg-class').style.visibility = 'visible';
-}
+      //  document.getElementById('onload').style.display = 'none';
+      //  document.body.classList.remove('hidden');
+      //  document.querySelector('.svg-class').style.visibility = 'visible';
+    }
   </script>
   <!--script api uv-->
   <title>Laboratorio de Innovacion Social</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="resources/style-hover-moreinfo.css"> -->
-  <!-- <script src="resources/fontasome.js" ></script> -->
+  <script src="resources/fontasome.js"></script>
   <link rel="stylesheet" href="resources/stylenew.css">
-  <script>
-    
-
-  </script>
 </head>
 <!--loader-->
+
 <body class="hidden">
   <!-- <div class="centrado" id='onload' style="z-index: 2;">
     <div class="lds-ring">
@@ -46,12 +43,11 @@ window.onload = function () {
         <div class="card header">
           <h3 style="font-size: 1rem;">Estacion Metereologica Zona Norte</h3>
         </div>
-
         <video id="miVideo"></video>
         <div class="body-tarjet">
           <h2>San Fernando Del Valle de Catamarca</h2>
           <h1><span id="ESP32_01_Temp"></span> &deg;C</span></h2>
-            
+
             <p><span id='iddescripcioncielo'></span> | Sensacion Termica <span id='sensaciontermica'></span>°C</p>
             <p>Rafaga de viento <span id="rafagadeviento"></span> km/h </p>
         </div>
@@ -68,7 +64,6 @@ window.onload = function () {
               <i class="fas fa-tint"></i> <span class="reading"><span id="ESP32_01_Humd"></span>&percnt;</span>
               <p class="humidityColor"> Humedad</p>
             </div>
-
             <div class="contenedorItem">
               <i class="fa-solid fa-gauge-simple-high" aria-hidden="true"></i> <span class="temperatureColor"><span
                   id="ESP32_01_Anemometro"></span>km/h </span>
@@ -91,8 +86,11 @@ window.onload = function () {
         </div>
         <div class='contenedorTodosItem'>
           <!-- Muestra los valores de humedad y temperatura recibidos de ESP32.. *** -->
-
           <div class="contenedorInterior">
+            <div class="contenedorItem">
+              <p><i class="fa-solid fa-eye"></i> <span class="" id="visibilidad"></span> Km</p>
+              <p>Visibilidad</p>
+            </div>
             <div class="contenedorItem">
               <span id=indiceuv> <span class="reading"><i class="fa-regular fa-sun"></i> <span id="uv"></span></span>
               </span>
@@ -109,18 +107,11 @@ window.onload = function () {
                   id="presion"></span> hPA</span>
               <p class="pluviometro_title"></i> Presion Atmosferica </p>
             </div>
-
-            <div class="contenedorItem">
-              <p><i class="fa-solid fa-eye"></i> <span class="" id="visibilidad"></span> Km</p>
-              <p>Visibilidad</p>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!--  -->
-
   <!-- <svg class="svg-class" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
 
@@ -153,8 +144,6 @@ window.onload = function () {
   </svg> -->
   </div>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
-
 </body>
 <footer>
   <div class="content">
@@ -163,9 +152,11 @@ window.onload = function () {
         style="border-radius: 15px;display: flex; justify-content: space-around; align-items: center; justify-content: center;">
         <img id="catacapi" src="resources/img/muniwhite.png"></img>
         <div class="texto-footer">
-          <h3>ÚLTIMA VEZ RECIBIDO DATOS DE ESP32 [ <span id="ESP32_01_LTRD"></span> ]</h3>
+          <h3>TABLA DE REGISTROS</h3>
           <a href="recordtable.php">
-          <button>Abrir tabla de registros</button></a>
+            <!-- HTML !-->
+            <button class="button-4" role="button">Abrir tabla registros</button>
+          </a>
         </div>
         <img id="whitenodo" src="resources/img/whitenodo.png"> </img>
       </div>
@@ -175,12 +166,12 @@ window.onload = function () {
   <script src="resources/getdata.js"></script>
   <script src="resources/cargaruv.js"></script>
   <script>
-      cargaruv();
-  cargarDatos();
-  Get_Data("esp32_01");
-setInterval(cargarDatos, 60000);
-setInterval(cargaruv, 1200000);
-setInterval(myTimer, 12000);
+    cargaruv();
+    cargarDatos();
+    Get_Data("esp32_01");
+    setInterval(cargarDatos, 60000);
+    setInterval(cargaruv, 1200000);
+    setInterval(myTimer, 12000);
   </script>
 </footer>
 
