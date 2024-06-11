@@ -272,7 +272,7 @@ body {
   border-radius: 15px;
   display: inline-block;
   height: auto; /* Cambiado a "auto" para permitir el crecimiento en altura según el contenido */
-  min-width: 100px; /* Establece un ancho mínimo para evitar el corte del primer elemento */
+  min-width: 120px; /* Establece un ancho mínimo para evitar el corte del primer elemento */
   border: 2px solid rgba(255, 255, 255, 0.551); /* Hacer el borde transparente */
   justify-content: flex-end;
   justify-content: space-around;
@@ -288,7 +288,7 @@ body {
   padding: 3px; /* Añade un pequeño relleno para mejorar la apariencia */
   white-space: nowrap; /* Evita que el texto se divida en varias líneas */
   overflow: hidden;
-  font-size: 7; /* Puedes ajustar según tus preferencias */
+  font-size: larger; /* Puedes ajustar según tus preferencias */
 }
 
 .body-tarjet h1 {

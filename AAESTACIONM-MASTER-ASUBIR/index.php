@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <!-- <link rel="stylesheet" href="resources/background.css"> -->
   <!-- <script src="resources/jquery.js"></script> -->
@@ -48,8 +47,8 @@
           <h2>San Fernando Del Valle de Catamarca</h2>
           <h1><span id="ESP32_01_Temp"></span> &deg;C</span></h2>
 
-            <p><span id='iddescripcioncielo'></span> | Sensacion Termica <span id='sensaciontermica'></span>°C</p>
-            <p>Rafaga de viento <span id="rafagadeviento"></span> km/h </p>
+            <p style="font-size:larger"><span id='iddescripcioncielo'></span> | Sensacion Termica <span id='sensaciontermica'></span>°C</p>
+            <p style="font-size:larger">Rafaga de viento <span id="rafagadeviento"></span> km/h </p>
         </div>
         <!-- <div class="detalless">
           <h2>Datos Generales<span id="ESP32_01_Status_Read_DHT11"></span></h2>
