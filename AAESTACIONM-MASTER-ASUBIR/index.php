@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script src="https://cdn.tailwindcss.com"></script>
   <!-- <link rel="stylesheet" href="resources/background.css"> -->
   <!-- <script src="resources/jquery.js"></script> -->
   <script>

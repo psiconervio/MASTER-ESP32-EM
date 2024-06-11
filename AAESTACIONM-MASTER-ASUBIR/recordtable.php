@@ -4,6 +4,7 @@
 <head>
   <title>Datos Estacion Metereologica del Nodo Tecnologico</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="resources/stylerecord.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -120,7 +121,7 @@
     </select>
     <button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Aplicar</button>
     <a href="index.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Volver al Dashboard</button></a>
-    <a href="grafico.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Grafico</button></a>
+    <a href="graficogpt2.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Grafico</button></a>
   </div>
   <br>
   <script>
