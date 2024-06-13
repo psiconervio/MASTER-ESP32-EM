@@ -1,5 +1,5 @@
 <?php
-require_once 'conexion/databaseAC.php';
+require_once 'conexion/database.php';
 
 $data = [];
 

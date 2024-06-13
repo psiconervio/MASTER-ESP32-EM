@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <!-- <link rel="stylesheet" href="resources/background.css"> -->
   <!-- <script src="resources/jquery.js"></script> -->
@@ -16,7 +18,6 @@
   </script>
   <!--script api uv-->
   <title>Laboratorio de Innovacion Social</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="resources/style-hover-moreinfo.css"> -->
   <script src="resources/fontasome.js"></script>
   <link rel="stylesheet" href="resources/stylenew.css">
