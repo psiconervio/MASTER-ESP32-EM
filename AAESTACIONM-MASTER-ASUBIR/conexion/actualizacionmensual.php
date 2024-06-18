@@ -1,84 +1,92 @@
 <?php
-include 'database.php';
+include 'database.php'; // Incluye el archivo que contiene la configuración y funciones de la base de datos
 
-$pdo = Database::connect();
+$pdo = Database::connect(); // Conecta a la base de datos
 
-$sql = 'SELECT * FROM esp32_01_tableupdatesemana ORDER BY date DESC, time DESC';
-$data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-Database::disconnect();
+// Consulta para obtener todos los registros de la tabla 'esp32_01_tableupdatedia' ordenados por fecha descendente
+$sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
+$data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); // Ejecuta la consulta y obtiene todos los registros como un array asociativo
+Database::disconnect(); // Desconecta de la base de datos
 
-$num = count($data);
-$arrayfechasphp = [];
+$months = []; // Array para almacenar los datos agrupados por meses
 
+// Recorre cada registro de datos
 foreach ($data as $row) {
-    $date = date_create($row['date']);
-    $dateFormat = date_format($date, "d-m-Y");
+    $date = new DateTime($row['fecha']); // Convierte la fecha de cada registro a un objeto DateTime
+    $month = $date->format("Y-m"); // Obtiene el año y mes de la fecha en formato 'YYYY-MM'
 
-    if (!isset($arrayfechasphp[$dateFormat])) {
-        $arrayfechasphp[$dateFormat] = [
-            'temperaturas' => [],
-            'humedades' => [],
-            'veletas' => [],
-            'anemometros' => [],
-            'pluviometros' => []
+    // Si no existe una entrada para el mes en el array $months, la inicializa
+    if (!isset($months[$month])) {
+        $months[$month] = [
+            'fechas' => [],
+            'max_temp' => [],
+            'min_temp' => [],
+            'max_humidity' => [],
+            'min_humidity' => [],
+            'moda_veleta' => [],
+            'avg_anemometro' => [],
+            'sum_pluviometro' => 0
         ];
     }
 
-    $arrayfechasphp[$dateFormat]['temperaturas'][] = $row['temperature'];
-    $arrayfechasphp[$dateFormat]['humedades'][] = $row['humidity'];
-    $arrayfechasphp[$dateFormat]['veletas'][] = $row['veleta'];
-    $arrayfechasphp[$dateFormat]['anemometros'][] = $row['anemometro'];
-    $arrayfechasphp[$dateFormat]['pluviometros'][] = $row['pluviometro'];
+    // Agrega los datos del registro actual al mes correspondiente
+    $months[$month]['fechas'][] = $row['fecha'];
+    $months[$month]['max_temp'][] = $row['max_temp'];
+    $months[$month]['min_temp'][] = $row['min_temp'];
+    $months[$month]['max_humidity'][] = $row['max_humidity'];
+    $months[$month]['min_humidity'][] = $row['min_humidity'];
+    $months[$month]['moda_veleta'][] = $row['moda_veleta'];
+    $months[$month]['avg_anemometro'][] = $row['avg_anemometro'];
+    $months[$month]['sum_pluviometro'] += $row['sum_pluviometro'];
 }
 
-// Función para calcular la moda
+// Función para calcular la moda de un array de valores
 function calcularModa($valores) {
-    $frecuencias = array_count_values($valores); // Cuenta la frecuencia de cada valor
+    $frecuencias = array_count_values($valores); // Cuenta la frecuencia de cada valor en el array
     arsort($frecuencias); // Ordena los valores por frecuencia en orden descendente
-    $moda = array_key_first($frecuencias); // Obtiene el valor con mayor frecuencia
-    return $moda;
+    $moda = array_key_first($frecuencias); // Obtiene el valor con mayor frecuencia (la moda)
+    return $moda; // Retorna la moda
 }
 
-$pdo = Database::connect();
-foreach ($arrayfechasphp as $date => $values) {
-    $max_temp = max($values['temperaturas']);
-    $min_temp = min($values['temperaturas']);
-    $max_humidity = max($values['humedades']);
-    $min_humidity = min($values['humedades']);
-    $moda_veleta = calcularModa($values['veletas']);
-    $max_anemometro = max($values['anemometros']);
-    $min_anemometro = min($values['anemometros']);
-    $avg_anemometro = array_sum($values['anemometros']) / count($values['anemometros']);
-    $rounded_avg_anemometro = round($avg_anemometro, 2);
-    $sum_pluviometro = array_sum($values['pluviometros']);
+$pdo = Database::connect(); // Conecta a la base de datos
 
-    $formatted_date = DateTime::createFromFormat('d-m-Y', $date)->format('Y-m-d');
-
-    echo "Fecha: $date\n <br>";
-    echo "Max Temp: $max_temp\n <br>";
-    echo "Min Temp: $min_temp\n <br>";
-    echo "Max Humidity: $max_humidity\n <br>";
-    echo "Min Humidity: $min_humidity\n <br>";
-    echo "Moda Veleta: $moda_veleta\n <br>";
-    echo "Avg Anemometro: $rounded_avg_anemometro\n <br>";
-    echo "Sum Pluviometro: $sum_pluviometro\n <br>";
-    echo "Fecha Formateada: $formatted_date\n <br><br>";
-
-    // Verifica si ya existe una entrada para la fecha formateada// Verifica si ya existe una entrada para la fecha formateada
-    $sqlCheck = "SELECT COUNT(*) FROM esp32_01_tableupdatedia WHERE fecha = ?";
+// Recorre cada mes en el array $months
+foreach ($months as $month => $values) {
+    // Verifica si ya existe una entrada para el mes
+    $sqlCheck = "SELECT COUNT(*) FROM esp32_01_tableupdatedia_mensual WHERE mes = ?";
     $stmt = $pdo->prepare($sqlCheck);
-    $stmt->execute([$formatted_date]);
+    $stmt->execute([$month]);
     $rowCount = $stmt->fetchColumn();
 
     if ($rowCount == 0) {
-        // Inserta los datos si no existe una entrada para la fecha
-        $sqlInsert = "INSERT INTO esp32_01_tableupdatedia (fecha, max_temp, min_temp, max_humidity, min_humidity, moda_veleta, avg_anemometro, sum_pluviometro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        // Calcula los promedios y otros valores estadísticos para el mes
+        $avg_max_temp = round(array_sum($values['max_temp']) / count($values['max_temp']), 2); // Promedio de temperatura máxima
+        $avg_min_temp = round(array_sum($values['min_temp']) / count($values['min_temp']), 2); // Promedio de temperatura mínima
+        $avg_max_humidity = round(array_sum($values['max_humidity']) / count($values['max_humidity']), 2); // Promedio de humedad máxima
+        $avg_min_humidity = round(array_sum($values['min_humidity']) / count($values['min_humidity']), 2); // Promedio de humedad mínima
+        $moda_veleta = calcularModa($values['moda_veleta']); // Moda de la veleta (dirección del viento más frecuente)
+        $avg_anemometro = round(array_sum($values['avg_anemometro']) / count($values['avg_anemometro']), 2); // Promedio del anemómetro (velocidad del viento)
+        $sum_pluviometro = $values['sum_pluviometro']; // Suma del pluviómetro (cantidad de lluvia)
+
+        // Inserta los datos calculados en la tabla mensual
+        $sqlInsert = "INSERT INTO esp32_01_tableupdatedia_mensual (mes, avg_max_temp, avg_min_temp, avg_max_humidity, avg_min_humidity, moda_veleta, avg_anemometro, sum_pluviometro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sqlInsert);
-        $stmt->execute([$formatted_date, $max_temp, $min_temp, $max_humidity, $min_humidity, $moda_veleta, $rounded_avg_anemometro, $sum_pluviometro]);
+        $stmt->execute([$month, $avg_max_temp, $avg_min_temp, $avg_max_humidity, $avg_min_humidity, $moda_veleta, $avg_anemometro, $sum_pluviometro]);
+        
+
     }
+
+
 }
 
-Database::disconnect();
+Database::disconnect(); // Desconecta de la base de datos
+// echo "Datos mensual <br>"; 
+// echo "Max Temp: $avg_max_temp\n <br>";
+// echo "Min Temp: $avg_min_temp\n <br>";
+// echo "Max Humidity: $avg_max_humidity\n <br>";
+// echo "Min Humidity: $avg_min_humidity\n <br>";
+// echo "Moda Veleta: $moda_veleta\n <br>";
+// echo "Avg Anemometro: $avg_anemometro\n <br>";
+// echo "Sum Pluviometro: $sum_pluviometro\n <br>";
+// echo "Fecha Formateada: $formatted_date\n <br><br>";
 ?>
-<script>    var data = <?php echo json_encode($data); ?>;
-console.log(data);</script>

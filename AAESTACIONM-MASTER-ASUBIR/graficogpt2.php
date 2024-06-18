@@ -41,7 +41,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
+<head> <style>
+      body {
+        margin: 0; /* Elimina márgenes por defecto del body */
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        border-radius: 12px;
+      }
+
+      .navbar a {
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .navbar a:hover {
+        background: #ddd;
+        color: black;
+      }
+
+      @media (max-width: 700px) {
+        .navbar a {
+          font-size: 20px;
+        }
+      }
+    </style></script>
+    <script src="resources/fontasome.js"></script>
+    <script src="https://kit.fontawesome.com/da4a5b6f37.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Fecha</title>
@@ -49,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <!-- Formulario HTML -->
+    <div class="divform">
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <label for="fecha">Selecciona una fecha:</label>
         <input type="date" name="fecha" id="fecha"><br>
@@ -64,10 +105,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select><br>
         <button type="submit">Enviar</button>
     </form>
+    </div>
 
     <div id="result"></div>
     <canvas id="myChart"></canvas>
-
+    <style>
+        .divform {
+            display: grid;
+            justify-items:center; 
+            aling-items: center;
+        }
+        
+    </style>
     <script>
         var data = <?php echo json_encode($data); ?>;
         console.log(data);
@@ -118,5 +167,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         };
     </script>
+        <div class="navbar">
+      <i class="fa-solid fa-house-chimney"></i>
+      <a href="#home">Inicio</a>
+      <i class="fa-solid fa-chart-line"></i>
+      <a href="#home">Grafico</a>
+      <i class="fa-solid fa-chart-simple"></i>
+      <a href="#news">Maximo</a>
+      <a href="#historico">Historico</a>
+      <i class="fa-solid fa-map"></i>
+      <a href="#mapa">Mapa</a>
+      <i class="fa-solid fa-bars"></i>
+      <a href="#mas">Mas</a>
+    </div>
 </body>
 </html>

@@ -1,84 +1,107 @@
 <?php
-include 'database.php';
+include 'database.php'; // Incluye el archivo que contiene la configuración y funciones de la base de datos
 
-$pdo = Database::connect();
+function getStartAndEndDate($week, $year) {
+    $dto = new DateTime();
+    $dto->setISODate($year, $week);
+    $startDate = $dto->format('Y-m-d');
+    $dto->modify('+6 days');
+    $endDate = $dto->format('Y-m-d');
+    return array($startDate, $endDate);
+}
 
-$sql = 'SELECT * FROM esp32_01_tablerecord ORDER BY date DESC, time DESC';
-$data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-Database::disconnect();
+$pdo = Database::connect(); // Conecta a la base de datos
 
-$num = count($data);
-$arrayfechasphp = [];
+$sql = 'SELECT * FROM esp32_01_tableupdatedia ORDER BY fecha DESC';
+$data = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); // Ejecuta la consulta y obtiene todos los registros como un array asociativo
+Database::disconnect(); // Desconecta de la base de datos
 
+$weeks = []; // Array para almacenar los datos agrupados por semanas
+
+// Recorre cada registro de datos
 foreach ($data as $row) {
-    $date = date_create($row['date']);
-    $dateFormat = date_format($date, "d-m-Y");
+    $date = new DateTime($row['fecha']); // Convierte la fecha de cada registro a un objeto DateTime
+    $week = $date->format("W"); // Obtiene el número de semana del año de la fecha
+    $year = $date->format("Y"); // Obtiene el año de la fecha
+    $weekKey = $year . '-W' . $week; // Crea una clave única para la semana en el formato 'YYYY-WW'
 
-    if (!isset($arrayfechasphp[$dateFormat])) {
-        $arrayfechasphp[$dateFormat] = [
-            'temperaturas' => [],
-            'humedades' => [],
-            'veletas' => [],
-            'anemometros' => [],
-            'pluviometros' => []
+    // Si no existe una entrada para la semana en el array $weeks, la inicializa
+    if (!isset($weeks[$weekKey])) {
+        $weeks[$weekKey] = [
+            'fechas' => [],
+            'max_temp' => [],
+            'min_temp' => [],
+            'max_humidity' => [],
+            'min_humidity' => [],
+            'moda_veleta' => [],
+            'avg_anemometro' => [],
+            'sum_pluviometro' => 0
         ];
     }
 
-    $arrayfechasphp[$dateFormat]['temperaturas'][] = $row['temperature'];
-    $arrayfechasphp[$dateFormat]['humedades'][] = $row['humidity'];
-    $arrayfechasphp[$dateFormat]['veletas'][] = $row['veleta'];
-    $arrayfechasphp[$dateFormat]['anemometros'][] = $row['anemometro'];
-    $arrayfechasphp[$dateFormat]['pluviometros'][] = $row['pluviometro'];
+    // Agrega los datos del registro actual a la semana correspondiente
+    $weeks[$weekKey]['fechas'][] = $row['fecha'];
+    $weeks[$weekKey]['max_temp'][] = $row['max_temp'];
+    $weeks[$weekKey]['min_temp'][] = $row['min_temp'];
+    $weeks[$weekKey]['max_humidity'][] = $row['max_humidity'];
+    $weeks[$weekKey]['min_humidity'][] = $row['min_humidity'];
+    $weeks[$weekKey]['moda_veleta'][] = $row['moda_veleta'];
+    $weeks[$weekKey]['avg_anemometro'][] = $row['avg_anemometro'];
+    $weeks[$weekKey]['sum_pluviometro'] += $row['sum_pluviometro'];
 }
 
-// Función para calcular la moda
+// Función para calcular la moda de un array de valores
 function calcularModa($valores) {
-    $frecuencias = array_count_values($valores); // Cuenta la frecuencia de cada valor
+    $frecuencias = array_count_values($valores); // Cuenta la frecuencia de cada valor en el array
     arsort($frecuencias); // Ordena los valores por frecuencia en orden descendente
-    $moda = array_key_first($frecuencias); // Obtiene el valor con mayor frecuencia
-    return $moda;
+    $moda = array_key_first($frecuencias); // Obtiene el valor con mayor frecuencia (la moda)
+    return $moda; // Retorna la moda
 }
 
-$pdo = Database::connect();
-foreach ($arrayfechasphp as $date => $values) {
-    $max_temp = max($values['temperaturas']);
-    $min_temp = min($values['temperaturas']);
-    $max_humidity = max($values['humedades']);
-    $min_humidity = min($values['humedades']);
-    $moda_veleta = calcularModa($values['veletas']);
-    $max_anemometro = max($values['anemometros']);
-    $min_anemometro = min($values['anemometros']);
-    $avg_anemometro = array_sum($values['anemometros']) / count($values['anemometros']);
-    $rounded_avg_anemometro = round($avg_anemometro, 2);
-    $sum_pluviometro = array_sum($values['pluviometros']);
+$pdo = Database::connect(); // Conecta a la base de datos
 
-    $formatted_date = DateTime::createFromFormat('d-m-Y', $date)->format('Y-m-d');
+// Recorre cada semana en el array $weeks
+foreach ($weeks as $weekKey => $values) {
+    // Obtiene la fecha de inicio y fin de la semana
+    list($startDate, $endDate) = getStartAndEndDate(explode('-W', $weekKey)[1], explode('-W', $weekKey)[0]);
 
-    echo "Fecha: $date\n <br>";
-    echo "Max Temp: $max_temp\n <br>";
-    echo "Min Temp: $min_temp\n <br>";
-    echo "Max Humidity: $max_humidity\n <br>";
-    echo "Min Humidity: $min_humidity\n <br>";
-    echo "Moda Veleta: $moda_veleta\n <br>";
-    echo "Avg Anemometro: $rounded_avg_anemometro\n <br>";
-    echo "Sum Pluviometro: $sum_pluviometro\n <br>";
-    echo "Fecha Formateada: $formatted_date\n <br><br>";
-
-    // Verifica si ya existe una entrada para la fecha formateada// Verifica si ya existe una entrada para la fecha formateada
-    $sqlCheck = "SELECT COUNT(*) FROM esp32_01_tableupdatedia WHERE fecha = ?";
+    // Verifica si ya existe una entrada para la semana
+    $sqlCheck = "SELECT COUNT(*) FROM esp32_01_tableupdatedia_semanal WHERE semana = ?";
     $stmt = $pdo->prepare($sqlCheck);
-    $stmt->execute([$formatted_date]);
+    $stmt->execute([$weekKey]);
     $rowCount = $stmt->fetchColumn();
 
     if ($rowCount == 0) {
-        // Inserta los datos si no existe una entrada para la fecha
-        $sqlInsert = "INSERT INTO esp32_01_tableupdatedia (fecha, max_temp, min_temp, max_humidity, min_humidity, moda_veleta, avg_anemometro, sum_pluviometro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        // Calcula los valores estadísticos para la semana
+        $max_temp = max($values['max_temp']); // Temperatura máxima
+        $min_temp = min($values['min_temp']); // Temperatura mínima
+        $max_humidity = max($values['max_humidity']); // Humedad máxima
+        $min_humidity = min($values['min_humidity']); // Humedad mínima
+        $moda_veleta = calcularModa($values['moda_veleta']); // Moda de la veleta (dirección del viento más frecuente)
+        $avg_anemometro = round(array_sum($values['avg_anemometro']) / count($values['avg_anemometro']), 2); // Promedio del anemómetro (velocidad del viento)
+        $sum_pluviometro = $values['sum_pluviometro']; // Suma del pluviómetro (cantidad de lluvia)
+
+        // Inserta los datos calculados en la tabla semanal
+        $sqlInsert = "INSERT INTO esp32_01_tableupdatedia_semanal (semana, start_date, end_date, max_temp, min_temp, max_humidity, min_humidity, moda_veleta, avg_anemometro, sum_pluviometro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sqlInsert);
-        $stmt->execute([$formatted_date, $max_temp, $min_temp, $max_humidity, $min_humidity, $moda_veleta, $rounded_avg_anemometro, $sum_pluviometro]);
+        $stmt->execute([$weekKey, $startDate, $endDate, $max_temp, $min_temp, $max_humidity, $min_humidity, $moda_veleta, $avg_anemometro, $sum_pluviometro]);
+       
+
     }
+
 }
 
-Database::disconnect();
+Database::disconnect(); // Desconecta de la base de datos
+        // // Imprime por pantalla la información ingresada
+        // echo "Semana: $weekKey<br>";
+        // echo "Fecha de inicio: $startDate<br>";
+        // echo "Fecha de fin: $endDate<br>";
+        // echo "Max Temp: $max_temp<br>";
+        // echo "Min Temp: $min_temp<br>";
+        // echo "Max Humidity: $max_humidity<br>";
+        // echo "Min Humidity: $min_humidity<br>";
+        // echo "Moda Veleta: $moda_veleta<br>";
+        // echo "Avg Anemometro: $avg_anemometro<br>";
+        // echo "Sum Pluviometro: $sum_pluviometro<br><br>";
 ?>
-<script>    var data = <?php echo json_encode($data); ?>;
-console.log(data);</script>
+
