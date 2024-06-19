@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     overflow: hidden;
-    background-color: #333;
+    background-color:#25488D;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -39,7 +39,7 @@ body {
   
   @media (max-width: 700px) {
     .navbar a {
-      font-size: 20px;
+      font-size: 15px;
     }
   }
   

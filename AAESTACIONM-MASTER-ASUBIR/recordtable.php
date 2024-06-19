@@ -29,7 +29,7 @@
     </thead>
     <tbody id="tbody_table_record">
       <?php
-      include 'conexion/database.php';
+      include 'conexion/databaseAC.php';
       //trabajar con php
       $num = 0;
       $arrayfechaexactatotal = [];

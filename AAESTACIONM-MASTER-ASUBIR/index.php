@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="navbar.css">
 
 <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <!-- <link rel="stylesheet" href="resources/background.css"> -->
@@ -112,6 +113,7 @@
         </div>
       </div>
     </div>
+    
   </div>
   <!-- <svg class="svg-class" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
@@ -143,9 +145,12 @@
       </use>
     </g>
   </svg> -->
+  
   </div>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+   
 </body>
+
 <footer>
   <div class="content">
     <div class="cards">
@@ -174,6 +179,31 @@
     setInterval(cargaruv, 1200000);
     setInterval(myTimer, 12000);
   </script>
+  
+ <div class="navbar">
+  <a href="#home">
+    <i class="fa-solid fa-house-chimney"></i>
+    <span>Inicio</span>
+  </a>
+  <a href="#home">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Grafico</span>
+  </a>
+  <a href="#news">
+    <i class="fa-solid fa-chart-simple"></i>
+    <span>Maximo</span>
+  </a>
+  <a href="#historico">
+    <i class="fa-solid fa-book-open"></i>
+    <span>Historico</span>
+  </a>
+  <a href="#mapa">
+    <i class="fa-solid fa-map"></i>
+    <span>Mapa</span>
+  </a>
+
+</div>
 </footer>
+
 
 </html>

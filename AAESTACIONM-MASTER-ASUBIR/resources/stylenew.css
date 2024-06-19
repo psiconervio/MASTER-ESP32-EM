@@ -44,7 +44,7 @@ p {
 .body-tarjet {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   margin-left: auto;
-  margin-bottom: 300px;
+  margin-bottom: 330px;
 }
 .transparencia {
   position: absolute;
@@ -133,6 +133,7 @@ body {
 }
 .content {
   padding: 5px;
+  margin-top: 15px;
 }
 .card {
   border: 4px solid rgb(49 43 43 / 11%);
