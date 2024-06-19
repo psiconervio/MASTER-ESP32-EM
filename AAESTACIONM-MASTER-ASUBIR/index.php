@@ -181,19 +181,19 @@
   </script>
   
  <div class="navbar">
-  <a href="#home">
+  <a href="index.php">
     <i class="fa-solid fa-house-chimney"></i>
     <span>Inicio</span>
   </a>
-  <a href="#home">
+  <a href="recordtable.php">
     <i class="fa-solid fa-chart-line"></i>
     <span>Grafico</span>
   </a>
-  <a href="#news">
+  <a href="graficodefinitivo.php">
     <i class="fa-solid fa-chart-simple"></i>
     <span>Maximo</span>
   </a>
-  <a href="#historico">
+  <a href="graficodefinitivo.php">
     <i class="fa-solid fa-book-open"></i>
     <span>Historico</span>
   </a>

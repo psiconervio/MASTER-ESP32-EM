@@ -1,10 +1,11 @@
-// recordtable.php
 <!DOCTYPE HTML>
 <html>
 <head>
   <title>Datos Estacion Metereologica del Nodo Tecnologico</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="resources/fontasome.js"></script>
+  <link rel="stylesheet" href="navbar.css">
   <link rel="stylesheet" href="resources/stylerecord.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -12,7 +13,6 @@
   <div class="topnav">
     <h3>LABORATORIO DE INNOVACION</h3>
   </div>
-  <br>
   <h3 style="color: #0c6980;">DATOS ESTACION METEREOLOGICA</h3>
   <table class="styled-table" id="table_id">
     <thead>
@@ -29,7 +29,7 @@
     </thead>
     <tbody id="tbody_table_record">
       <?php
-      include 'conexion/databaseAC.php';
+      include 'conexion/database.php';
       //trabajar con php
       $num = 0;
       $arrayfechaexactatotal = [];
@@ -106,7 +106,6 @@
       </script>
     </tbody>
   </table>
-  <br>
   <div class="btn-group">
     <button class="button" id="btn_prev" onclick="prevPage()">Anterior</button>
     <button class="button" id="btn_next" onclick="nextPage()">Siguiente</button>
@@ -120,10 +119,9 @@
       <option value="100">100</option>
     </select>
     <button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Aplicar</button>
-    <a href="index.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Volver al Dashboard</button></a>
-    <a href="graficogpt2.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Grafico</button></a>
+    <!-- <a href="index.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Volver al Dashboard</button></a>
+    <a href="graficogpt2.php"><button class="button" id="btn_apply" onclick="apply_Number_of_Rows()">Grafico</button></a> -->
   </div>
-  <br>
   <script>
     //script para sacar fecha actual y de los ultimos 6 dias
     // let fechas = [];
@@ -330,6 +328,29 @@
     }
     //console.log(arrayfechaexactatotal);
   </script>
+   <div class="navbar">
+  <a href="index.php">
+    <i class="fa-solid fa-house-chimney"></i>
+    <span>Inicio</span>
+  </a>
+  <a href="recordtable.php">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Grafico</span>
+  </a>
+  <a href="graficodefinitivo.php">
+    <i class="fa-solid fa-chart-simple"></i>
+    <span>Maximo</span>
+  </a>
+  <a href="graficodefinitivo.php">
+    <i class="fa-solid fa-book-open"></i>
+    <span>Historico</span>
+  </a>
+  <a href="#mapa">
+    <i class="fa-solid fa-map"></i>
+    <span>Mapa</span>
+  </a>
+
+</div>
 </body>
 <footer>
 </footer>
