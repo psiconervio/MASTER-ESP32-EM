@@ -168,19 +168,9 @@
       </div>
     </div>
   </div>
-  <script src="resources/apiclimaa.js"></script>
-  <script src="resources/getdata.js"></script>
-  <script src="resources/cargaruv.js"></script>
-  <script>
-    cargaruv();
-    cargarDatos();
-    Get_Data("esp32_01");
-    setInterval(cargarDatos, 60000);
-    setInterval(cargaruv, 1200000);
-    setInterval(myTimer, 12000);
-  </script>
   
- <div class="navbar">
+<div class="contentnavbar">
+<div class="navbar">
   <a href="index.php">
     <i class="fa-solid fa-house-chimney"></i>
     <span>Inicio</span>
@@ -203,7 +193,19 @@
   </a>
 
 </div>
+</div>
 </footer>
 
+<script src="resources/apiclimaa.js"></script>
+  <script src="resources/getdata.js"></script>
+  <script src="resources/cargaruv.js"></script>
+  <script>
+    cargaruv();
+    cargarDatos();
+    Get_Data("esp32_01");
+    setInterval(cargarDatos, 60000);
+    setInterval(cargaruv, 1200000);
+    setInterval(myTimer, 12000);
+  </script>
 
 </html>
