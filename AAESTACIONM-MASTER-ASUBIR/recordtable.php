@@ -2,13 +2,42 @@
 <html>
 <head>
   <title>Datos Estacion Metereologica del Nodo Tecnologico</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="hamburguesa.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="resources/fontasome.js"></script>
-  <link rel="stylesheet" href="navbar.css">
+  <!-- <link rel="stylesheet" href="navbar.css"> -->
   <link rel="stylesheet" href="resources/stylerecord.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<header>
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
+  </header>
+  <div class="navbar" id="navbar">
+  <a href="index.php">
+    <i class="fa-solid fa-house-chimney"></i>
+    <span>Inicio</span>
+  </a>
+  <a href="recordtable.php">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Grafico</span>
+  </a>
+  <a href="graficodefinitivo.php">
+    <i class="fa-solid fa-chart-simple"></i>
+    <span>Maximo</span>
+  </a>
+  <a href="graficodefinitivo.php">
+    <i class="fa-solid fa-book-open"></i>
+    <span>Historico</span>
+  </a>
+  <a href="#mapa">
+    <i class="fa-solid fa-map"></i>
+    <span>Mapa</span>
+  </a>
+
+</div>
+<script src="hamburguesa.js"></script>
+
 <body>
   <div class="topnav">
     <h3>LABORATORIO DE INNOVACION</h3>
@@ -328,30 +357,6 @@
     }
     //console.log(arrayfechaexactatotal);
   </script>
-   <div class="navbar">
-  <a href="index.php">
-    <i class="fa-solid fa-house-chimney"></i>
-    <span>Inicio</span>
-  </a>
-  <a href="recordtable.php">
-    <i class="fa-solid fa-chart-line"></i>
-    <span>Grafico</span>
-  </a>
-  <a href="graficodefinitivo.php">
-    <i class="fa-solid fa-chart-simple"></i>
-    <span>Maximo</span>
-  </a>
-  <a href="graficodefinitivo.php">
-    <i class="fa-solid fa-book-open"></i>
-    <span>Historico</span>
-  </a>
-  <a href="#mapa">
-    <i class="fa-solid fa-map"></i>
-    <span>Mapa</span>
-  </a>
 
-</div>
 </body>
-<footer>
-</footer>
 </html>
