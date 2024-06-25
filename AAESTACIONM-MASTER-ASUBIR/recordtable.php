@@ -3,7 +3,7 @@
 <head>
   <title>Datos Estacion Metereologica del Nodo Tecnologico</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="hamburguesa.css">
+  <link rel="stylesheet" href="resources/hamburguesa.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="resources/fontasome.js"></script>
   <!-- <link rel="stylesheet" href="navbar.css"> -->
@@ -36,7 +36,7 @@
   </a>
 
 </div>
-<script src="hamburguesa.js"></script>
+<script src="resources/hamburguesa.js"></script>
 
 <body>
   <div class="topnav">
@@ -58,7 +58,7 @@
     </thead>
     <tbody id="tbody_table_record">
       <?php
-      include 'conexion/database.php';
+      include 'conexion/databaseAC.php';
       //trabajar con php
       $num = 0;
       $arrayfechaexactatotal = [];

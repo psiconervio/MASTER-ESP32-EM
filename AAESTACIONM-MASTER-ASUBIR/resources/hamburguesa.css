@@ -4,10 +4,15 @@
 
 header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
     background-color: #333;
     color: #fff;
+    margin-bottom: 3px;
+}
+header h2{
+    margin-left: 15px;
 }
 
 #menu-icon {
@@ -20,6 +25,7 @@ header {
     flex-direction: column;
     background-color: #444;
     padding: 10px;
+    margin-bottom: 5px;
 }
 
 .navbar a {
@@ -37,3 +43,13 @@ header {
 .navbar a:hover {
     background-color: #555;
 }
+/* .content-header{
+    display: flex;
+    align-items: start;
+} */
+
+@media (max-width: 700px) {
+    header {
+        justify-content: start;
+    }
+  }

@@ -23,11 +23,12 @@
   <!-- <link rel="stylesheet" href="resources/style-hover-moreinfo.css"> -->
   <script src="resources/fontasome.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="hamburguesa.css">
+  <link rel="stylesheet" href="resources/hamburguesa.css">
   <link rel="stylesheet" href="resources/stylenew.css">
 </head>
 <header>
-        <i class="fa-solid fa-bars" id="menu-icon"></i>
+<i class="fa-solid fa-bars" id="menu-icon"></i>
+<h2>Laboratorio de Innovacion</h2>
   </header>
   <div class="navbar" id="navbar">
   <a href="index.php">
@@ -215,6 +216,6 @@
     setInterval(cargaruv, 1200000);
     setInterval(myTimer, 12000);
   </script>
-<script src="hamburguesa.js"></script>
+<script src="resources/hamburguesa.js"></script>
 
 </html>

@@ -1,44 +1,4 @@
-<?php
 
-require_once 'conexion/database.php';
-
-$data = [];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $fecha = $_POST['fecha'];
-  $item = $_POST["items"];
-
-  if (!empty($fecha)) {
-    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
-      try {
-        $pdo = Database::connect();
-        $sql = "SELECT * FROM esp32_01_tableupdatedia WHERE fecha >= DATE_SUB(:fecha, INTERVAL 7 DAY) LIMIT 7";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':fecha', $fecha);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if ($stmt->rowCount() > 0) {
-          foreach ($result as $row) {
-            echo "<br> - Fecha: " . $row["fecha"] . "";
-            $data[] = $row;
-          }
-        } else {
-          echo "No se encontraron registros";
-        }
-
-        Database::disconnect();
-      } catch (PDOException $e) {
-        echo "Error de consulta: " . $e->getMessage();
-      }
-    } else {
-      echo "Formato de fecha inválido. Use YYYY-MM-DD.";
-    }
-  } else {
-    echo "La fecha no puede estar vacía";
-  }
-}
-?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -87,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </script>
   <script src="resources/fontasome.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="hamburguesa.css">
+  <link rel="stylesheet" href="resources/hamburguesa.css">
+  <!-- <link rel="stylesheet" href="resources/stylenew.css"> -->
   <script src="https://kit.fontawesome.com/da4a5b6f37.js" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,6 +106,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <button type="submit">Enviar</button>
     </form>
   </div>
+  <?php
+
+require_once 'conexion/databaseAC.php';
+
+$data = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $fecha = $_POST['fecha'];
+  $item = $_POST["items"];
+
+  if (!empty($fecha)) {
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+      try {
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM esp32_01_tableupdatedia WHERE fecha >= DATE_SUB(:fecha, INTERVAL 7 DAY) LIMIT 7";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':fecha', $fecha);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($stmt->rowCount() > 0) {
+          foreach ($result as $row) {
+            echo "<br> - Fecha: " . $row["fecha"] . "";
+            $data[] = $row;
+          }
+        } else {
+          echo "No se encontraron registros";
+        }
+
+        Database::disconnect();
+      } catch (PDOException $e) {
+        echo "Error de consulta: " . $e->getMessage();
+      }
+    } else {
+      echo "Formato de fecha inválido. Use YYYY-MM-DD.";
+    }
+  } else {
+    echo "La fecha no puede estar vacía";
+  }
+}
+?>
 
   <div id="result"></div>
   <canvas id="myChart"></canvas>
@@ -206,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
     };
   </script>
-  <script src="hamburguesa.js"></script>
+  <script src="resources/hamburguesa.js"></script>
 </body>
 
 </html>
