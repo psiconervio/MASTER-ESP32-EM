@@ -43,7 +43,7 @@
   </script>
   <script src="resources/fontasome.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="resources/hamburguesa.css">
+  <!-- <link rel="stylesheet" href="resources/hamburguesa.css"> -->
   <link rel="stylesheet" href="resources/stylerecord.css">
   <!-- <link rel="stylesheet" href="resources/stylenew.css"> -->
   <script src="https://kit.fontawesome.com/da4a5b6f37.js" crossorigin="anonymous"></script>

@@ -40,7 +40,7 @@ function actualizarVideoYDescripcion(descripcionCielo) {
       descripcionTexto = "Cielo Limpio";
       break;
     case 'broken clouds':
-      videoSrc = 'resources/videos/gif/pocasnubess.gif';
+      videoSrc = 'resources/videos/pocasnubess.mp4';
       descripcionTexto = "Nubes rotas";
       break;
     case 'thunderstorm with rain':

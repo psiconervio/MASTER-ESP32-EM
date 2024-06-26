@@ -54,15 +54,15 @@ foreach ($arrayfechasphp as $date => $values) {
 
     $formatted_date = DateTime::createFromFormat('d-m-Y', $date)->format('Y-m-d');
 
-    echo "Fecha: $date\n <br>";
-    echo "Max Temp: $max_temp\n <br>";
-    echo "Min Temp: $min_temp\n <br>";
-    echo "Max Humidity: $max_humidity\n <br>";
-    echo "Min Humidity: $min_humidity\n <br>";
-    echo "Moda Veleta: $moda_veleta\n <br>";
-    echo "Avg Anemometro: $rounded_avg_anemometro\n <br>";
-    echo "Sum Pluviometro: $sum_pluviometro\n <br>";
-    echo "Fecha Formateada: $formatted_date\n <br><br>";
+    // echo "Fecha: $date\n <br>";
+    // echo "Max Temp: $max_temp\n <br>";
+    // echo "Min Temp: $min_temp\n <br>";
+    // echo "Max Humidity: $max_humidity\n <br>";
+    // echo "Min Humidity: $min_humidity\n <br>";
+    // echo "Moda Veleta: $moda_veleta\n <br>";
+    // echo "Avg Anemometro: $rounded_avg_anemometro\n <br>";
+    // echo "Sum Pluviometro: $sum_pluviometro\n <br>";
+    // echo "Fecha Formateada: $formatted_date\n <br><br>";
 
     // Verifica si ya existe una entrada para la fecha formateada// Verifica si ya existe una entrada para la fecha formateada
     $sqlCheck = "SELECT COUNT(*) FROM esp32_01_tableupdatedia WHERE fecha = ?";

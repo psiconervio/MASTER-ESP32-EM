@@ -104,4 +104,3 @@ Database::disconnect(); // Desconecta de la base de datos
         // echo "Avg Anemometro: $avg_anemometro<br>";
         // echo "Sum Pluviometro: $sum_pluviometro<br><br>";
 ?>
-

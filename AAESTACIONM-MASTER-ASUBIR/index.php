@@ -20,14 +20,14 @@
   <!-- <link rel="stylesheet" href="resources/style-hover-moreinfo.css"> -->
   <script src="resources/fontasome.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="resources/hamburguesa.css">
+  <!-- <link rel="stylesheet" href="resources/hamburguesa.css"> -->
   <link rel="stylesheet" href="resources/stylenew.css">
 </head>
 
 
-<!--loader-->
+<!--body class="hidden"-->
 
-<body class="hidden">
+<body >
   <!-- <div class="centrado" id='onload' style="z-index: 2;">
     <div class="lds-ring">
       <div></div>
@@ -176,7 +176,9 @@
   
   </div>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-   
+<?php 
+include 'conexion/actdiarianew.php';
+?>
 </body>
 
 <footer>
@@ -196,9 +198,6 @@
       </div>
     </div>
   </div>
-  
-
-
 </footer>
 
 <script src="resources/apiclimaa.js"></script>
