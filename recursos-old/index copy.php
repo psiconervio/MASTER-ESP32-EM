@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <script src="resources/jquery.js"></script>
   <script>

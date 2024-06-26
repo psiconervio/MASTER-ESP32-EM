@@ -60,8 +60,7 @@
     <tbody id="tbody_table_record">
       <?php
       include 'conexion/database.php';
-      include 'conexion/actmensualnew.php';
-       include 'conexion/actsemanalnew.php';
+
 
       //trabajar con php
       $num = 0;
@@ -361,6 +360,8 @@
     }
     //console.log(arrayfechaexactatotal);
   </script>
-
+<?php
+      include 'conexion/actmensualnew.php';
+      include 'conexion/actsemanalnew.php';?>
 </body>
 </html>

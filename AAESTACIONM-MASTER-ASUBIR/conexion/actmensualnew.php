@@ -78,7 +78,7 @@ try {
 
     Database::disconnect(); // Desconecta de la base de datos
 
-    echo "Datos mensuales actualizados correctamente.";
+    echo "Datos mensuales actualizados correctamente.<br>";
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }

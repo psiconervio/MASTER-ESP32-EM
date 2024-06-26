@@ -176,9 +176,7 @@
   
   </div>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<?php 
-include 'conexion/actdiarianew.php';
-?>
+
 </body>
 
 <footer>
@@ -212,5 +210,7 @@ include 'conexion/actdiarianew.php';
     setInterval(myTimer, 12000);
   </script>
 <script src="resources/hamburguesa.js"></script>
-
+<?php 
+include 'conexion/actdiarianew.php';
+?>
 </html>
