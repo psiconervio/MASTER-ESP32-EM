@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="background-color: #202020;">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <!-- <link rel="stylesheet" href="navbar.css"> -->
-
-<!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <!-- <link rel="stylesheet" href="resources/background.css"> -->
   <!-- <script src="resources/jquery.js"></script> -->
   <!-- <script>
@@ -26,10 +23,26 @@
   <link rel="stylesheet" href="resources/hamburguesa.css">
   <link rel="stylesheet" href="resources/stylenew.css">
 </head>
-<header>
-<i class="fa-solid fa-bars" id="menu-icon"></i>
-<h2>Laboratorio de Innovacion</h2>
-  </header>
+
+
+<!--loader-->
+
+<body class="hidden">
+  <!-- <div class="centrado" id='onload' style="z-index: 2;">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div> -->
+  <div class="topnav">
+  <!-- <i class="fa-solid fa-bars" id="menu-icon"></i> -->
+    <i class="fa-solid fa-bars" id="menu-icon"></i>
+    <h3>Laboratorio de Innovacion - Estacion Metereologica </h3>
+    <img src="resources/img/logolabblack-modified.png" style="heigth:70px; width: 60px;">
+  </div>
+
   <div class="navbar" id="navbar">
   <a href="index.php">
     <i class="fa-solid fa-house-chimney"></i>
@@ -47,29 +60,12 @@
     <i class="fa-solid fa-book-open"></i>
     <span>Historico</span>
   </a>
-  <a href="#mapa">
+  <!-- <a href="#mapa">
     <i class="fa-solid fa-map"></i>
     <span>Mapa</span>
-  </a>
+  </a> -->
 
 </div>
-
-<!--loader-->
-
-<body class="hidden">
-  <!-- <div class="centrado" id='onload' style="z-index: 2;">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div> -->
-  <div class="topnav">
-  <!-- <i class="fa-solid fa-bars" id="menu-icon"></i> -->
-    <img src="resources/img/logolabblack-modified.png" style="heigth:70px; width: 60px;">
-    <h3>Laboratorio de Innovacion - Estacion Metereologica </h3>
-  </div>
   <!-- MONITOREO Y CONTROL DE PANTALLAS (content es el contenedor main, cards son cada uno de los bloques) -->
   <div class="content">
     <div class="cards">

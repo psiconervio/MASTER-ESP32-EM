@@ -110,7 +110,7 @@ html {
   display: inline-block;
   text-align: center;
   /* background-color: #232325; */
-  background-color: #202020;
+  
 }
 
 h2 {
@@ -130,6 +130,7 @@ body {
   color: white;
   font-size: 1.2rem;
 }
+
 .content {
   padding: 5px;
   margin-top: 15px;
@@ -522,5 +523,19 @@ input:disabled + .sliderTS {
   .svg-class{
     top: 40px;
   }
-  
+  .topnav{
+   justify-content: space-evenly;
+
+  }
+}
+@media (max-width: 1024px) {
+  .navbar{
+
+    justify-content: center;
+    align-items: center;
+  }
+  /* .topnav i{
+    margin-right: 10px;
+
+  } */
 }

@@ -3,6 +3,7 @@
 <head>
   <title>Datos Estacion Metereologica del Nodo Tecnologico</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- <link rel="stylesheet" href="resources/stylenew.css"> -->
   <link rel="stylesheet" href="resources/hamburguesa.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="resources/fontasome.js"></script>
@@ -10,9 +11,14 @@
   <link rel="stylesheet" href="resources/stylerecord.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<header>
-        <i class="fa-solid fa-bars" id="menu-icon"></i>
-  </header>
+<body>
+<div class="topnav">
+  <!-- <i class="fa-solid fa-bars" id="menu-icon"></i> -->
+    <i class="fa-solid fa-bars" id="menu-icon"></i>
+    <h3>Laboratorio de Innovacion - Estacion Metereologica </h3>
+    <img src="resources/img/logolabblack-modified.png" style="heigth:70px; width: 60px;">
+  </div>
+
   <div class="navbar" id="navbar">
   <a href="index.php">
     <i class="fa-solid fa-house-chimney"></i>
@@ -30,18 +36,13 @@
     <i class="fa-solid fa-book-open"></i>
     <span>Historico</span>
   </a>
-  <a href="#mapa">
+  <!-- <a href="#mapa">
     <i class="fa-solid fa-map"></i>
     <span>Mapa</span>
-  </a>
+  </a> -->
+  <script src="resources/hamburguesa.js"></script>
 
 </div>
-<script src="resources/hamburguesa.js"></script>
-
-<body>
-  <div class="topnav">
-    <h3>LABORATORIO DE INNOVACION</h3>
-  </div>
   <h3 style="color: #0c6980;">DATOS ESTACION METEREOLOGICA</h3>
   <table class="styled-table" id="table_id">
     <thead>

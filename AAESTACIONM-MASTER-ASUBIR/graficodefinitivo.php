@@ -1,15 +1,11 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <!-- <style>
     body {
       margin: 0;
       /* Elimina márgenes por defecto del body */
     }
-
     .navbar {
       display: flex;
       justify-content: center;
@@ -48,6 +44,7 @@
   <script src="resources/fontasome.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="resources/hamburguesa.css">
+  <link rel="stylesheet" href="resources/stylerecord.css">
   <!-- <link rel="stylesheet" href="resources/stylenew.css"> -->
   <script src="https://kit.fontawesome.com/da4a5b6f37.js" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
@@ -58,10 +55,14 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- <link rel="stylesheet" href="navbar.css"> -->
 </head>
-<header>
-  <i class="fa-solid fa-bars" id="menu-icon"></i>
-</header>
-<div class="navbar" id="navbar">
+<div class="topnav">
+  <!-- <i class="fa-solid fa-bars" id="menu-icon"></i> -->
+    <i class="fa-solid fa-bars" id="menu-icon"></i>
+    <h3>Laboratorio de Innovacion - Estacion Metereologica </h3>
+    <img src="resources/img/logolabblack-modified.png" style="heigth:70px; width: 60px;">
+  </div>
+
+  <div class="navbar" id="navbar">
   <a href="index.php">
     <i class="fa-solid fa-house-chimney"></i>
     <span>Inicio</span>
@@ -78,12 +79,12 @@
     <i class="fa-solid fa-book-open"></i>
     <span>Historico</span>
   </a>
-  <a href="#mapa">
+  <!-- <a href="#mapa">
     <i class="fa-solid fa-map"></i>
     <span>Mapa</span>
-  </a>
-</div>
+  </a> -->
 
+</div>
 <h1>Selecciona tu fecha</h1>
 
 <body>
