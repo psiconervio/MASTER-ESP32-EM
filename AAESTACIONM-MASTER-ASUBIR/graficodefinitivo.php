@@ -50,7 +50,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="resources/fontasome.js"></script>
-
   <title>Formulario de Fecha</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- <link rel="stylesheet" href="navbar.css"> -->
@@ -61,7 +60,6 @@
     <h3>Laboratorio de Innovacion - Estacion Metereologica </h3>
     <img src="resources/img/logolabblack-modified.png" style="heigth:70px; width: 60px;">
   </div>
-
   <div class="navbar" id="navbar">
   <a href="index.php">
     <i class="fa-solid fa-house-chimney"></i>
@@ -83,10 +81,8 @@
     <i class="fa-solid fa-map"></i>
     <span>Mapa</span>
   </a> -->
-
 </div>
 <h1>Selecciona tu fecha</h1>
-
 <body>
   <br>
   <!-- Formulario HTML -->
@@ -108,9 +104,7 @@
     </form>
   </div>
   <?php
-
-require_once 'conexion/databaseAC.php';
-
+require_once 'conexion/database.php';
 $data = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -188,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         datasets: [{
           label: 'Sensor Seleccionado',
           data: data.map(item => item.max_temp),
-          backgroundColor: "rgba(255, 99, 132)",
+          backgroundColor: "rgba(75, 192, 192, 1)",
           borderColor: "rgb(255, 99, 132)",
           fill: false
         }]

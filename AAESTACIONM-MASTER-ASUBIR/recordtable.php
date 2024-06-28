@@ -347,7 +347,7 @@
         }]
       },
       options: {
-        responsive: true,
+        responsive: false,
         scales: {
           y: {
             beginAtZero: true
