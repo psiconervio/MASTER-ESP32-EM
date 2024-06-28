@@ -104,7 +104,7 @@
         <option value="avg_anemometro">Velocidad del Viento</option>
         <option value="sum_pluviometro">Pluviómetro</option>
       </select><br>
-      <button type="submit">Enviar</button>
+      <button type="submit">Consultar</button>
     </form>
   </div>
   <?php

@@ -186,7 +186,8 @@
         style="border-radius: 15px;display: flex; justify-content: space-around; align-items: center; justify-content: center;">
         <img id="catacapi" src="resources/img/muniwhite.png"></img>
         <div class="texto-footer">
-          <h3>TABLA DE REGISTROS</h3>
+          
+          <h3>Ultima Actulizacion: <span id="ESP32_01_LTRD"></span></h3>
           <a href="recordtable.php">
             <!-- HTML !-->
             <button class="button-4" role="button">Abrir tabla registros</button>

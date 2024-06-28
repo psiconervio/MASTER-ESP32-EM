@@ -35,6 +35,7 @@ async function Get_Data(id) {
         document.getElementById("ESP32_01_Temp").innerHTML = myObj.temperature;
         document.getElementById("ESP32_01_Humd").innerHTML = myObj.humidity;
         // document.getElementById("ESP32_01_LTRD").innerHTML = "Time : " + myObj.ls_time + " | Date : " + myObj.ls_date + " (dd-mm-yyyy)";
+         document.getElementById("ESP32_01_LTRD").innerHTML = "<br>" + myObj.ls_date  + "<br> a las " + myObj.ls_time;
         document.getElementById("ESP32_01_Veleta").innerHTML = myObj.veleta;
         document.getElementById("ESP32_01_Anemometro").innerHTML = myObj.anemometro;
         document.getElementById("ESP32_01_Pluviometro").innerHTML = myObj.pluviometro;
